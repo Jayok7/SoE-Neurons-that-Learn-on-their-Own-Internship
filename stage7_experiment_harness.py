@@ -36,7 +36,10 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader, TensorDataset
 import numpy as np
 
-OUT = "experiments"
+# Output and data locations. Default to local folders, but allow the CSF job
+# script to redirect them via environment variables without editing this file.
+OUT = os.environ.get("NAN_OUT_DIR", "experiments")
+DATA_ROOT = os.environ.get("NAN_DATA_DIR", "./data")
 os.makedirs(OUT, exist_ok=True)
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -460,7 +463,8 @@ def multiseed(make_and_run, seeds, in_dim, hidden, num_classes):
 # ==============================================================================
 # Data
 # ==============================================================================
-def get_loaders(resolution=14, num_classes=10, batch_size=128, root="./data"):
+def get_loaders(resolution=14, num_classes=10, batch_size=128, root=None):
+    root = root if root is not None else DATA_ROOT
     from torchvision import datasets, transforms
     tf = transforms.Compose([transforms.Resize((resolution, resolution)),
                              transforms.ToTensor()])
@@ -489,7 +493,14 @@ def get_loaders(resolution=14, num_classes=10, batch_size=128, root="./data"):
 # ==============================================================================
 # Plotting (saves PNGs; no display needed)
 # ==============================================================================
-def plot_curves(curve_dict, metric, ylabel, fname, title):
+def _outdir(subdir=None):
+    """Return the output directory, creating a subdirectory under OUT if given."""
+    d = os.path.join(OUT, subdir) if subdir else OUT
+    os.makedirs(d, exist_ok=True)
+    return d
+
+
+def plot_curves(curve_dict, metric, ylabel, fname, title, subdir=None):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -501,11 +512,11 @@ def plot_curves(curve_dict, metric, ylabel, fname, title):
         plt.fill_between(ep, m - s, m + s, alpha=0.2)
     plt.xlabel("epoch"); plt.ylabel(ylabel); plt.title(title)
     plt.legend(); plt.grid(alpha=0.3); plt.tight_layout()
-    path = os.path.join(OUT, fname); plt.savefig(path, dpi=130); plt.close()
+    path = os.path.join(_outdir(subdir), fname); plt.savefig(path, dpi=130); plt.close()
     print(f"  saved {path}")
 
 
-def plot_sweep(xs, ys_dict, xlabel, fname, title):
+def plot_sweep(xs, ys_dict, xlabel, fname, title, subdir=None):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -518,14 +529,170 @@ def plot_sweep(xs, ys_dict, xlabel, fname, title):
     ax1.set_xlabel(xlabel); ax1.set_ylabel("test accuracy (%)", color="tab:blue")
     ax2.set_ylabel("effective rank", color="tab:red")
     ax1.set_title(title); ax1.grid(alpha=0.3); fig.tight_layout()
-    path = os.path.join(OUT, fname); plt.savefig(path, dpi=130); plt.close()
+    path = os.path.join(_outdir(subdir), fname); plt.savefig(path, dpi=130); plt.close()
     print(f"  saved {path}")
 
 
-def save_json(obj, fname):
-    with open(os.path.join(OUT, fname), "w") as f:
+def save_json(obj, fname, subdir=None):
+    path = os.path.join(_outdir(subdir), fname)
+    with open(path, "w") as f:
         json.dump(obj, f, indent=2)
-    print(f"  saved {os.path.join(OUT, fname)}")
+    print(f"  saved {path}")
+
+
+# ==============================================================================
+# Neuron visualizations — what is each neuron "seeing"?
+# ==============================================================================
+@torch.no_grad()
+def plot_neuron_decoders(model, resolution, fname, title, subdir=None,
+                         max_neurons=40, ncols=8):
+    """Visualise each neuron's decoder weights reshaped to (res x res).
+
+    For NAN layers, each row of decoder_weight IS that neuron's reconstruction
+    template — the spatial pattern it tries to reconstruct from its single
+    scalar code. If neurons have learned independent features, these should
+    look visibly different. If they've collapsed, they'll all look alike.
+
+    Uses a red-blue diverging colourmap (like the reference image): blue for
+    negative weights, red for positive, white for zero.
+
+    For NN/ANN architectures the decoder weights aren't per-neuron, so this
+    function will skip gracefully.
+    """
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import TwoSlopeNorm
+
+    layer = model.hidden
+    num_neurons = layer.encoder.out_features
+    decoder_is_per_neuron = (layer.decoder_weight.shape[0] == num_neurons
+                             and layer.decoder_weight.abs().sum() > 0)
+    if not decoder_is_per_neuron:
+        print(f"  [plot_neuron_decoders] skipping — not a per-neuron decoder ({type(layer).__name__})")
+        return
+
+    weights = layer.decoder_weight.detach().cpu().numpy()   # (num_neurons, in_features)
+    n_show = min(num_neurons, max_neurons)
+    nrows = int(np.ceil(n_show / ncols))
+
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 1.8, nrows * 2.0))
+    axes = np.array(axes).reshape(-1)   # flatten for easy indexing
+
+    # Global colour normalisation so all subplots share the same scale
+    vmax = np.abs(weights[:n_show]).max()
+    norm = TwoSlopeNorm(vmin=-vmax, vcenter=0, vmax=vmax)
+
+    for i in range(n_show):
+        w = weights[i].reshape(resolution, resolution)
+        axes[i].imshow(w, cmap="RdBu_r", norm=norm, interpolation="nearest")
+        axes[i].set_title(f"neuron {i}", fontsize=8)
+        axes[i].axis("off")
+
+    # Hide any leftover axes
+    for j in range(n_show, len(axes)):
+        axes[j].axis("off")
+
+    fig.suptitle(title, fontsize=12, fontweight="bold", y=1.02)
+    fig.tight_layout()
+    path = os.path.join(_outdir(subdir), fname)
+    fig.savefig(path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  saved {path}")
+
+
+@torch.no_grad()
+def plot_neuron_activations(model, test_loader, resolution, fname, title,
+                            subdir=None, max_neurons=40, ncols=8, topk=50):
+    """Visualise what each neuron responds to by averaging the top-k inputs
+    that produce the highest activation for that neuron.
+
+    This is the activation-based complement to the decoder-weight view: instead
+    of showing WHAT the neuron reconstructs (its template), this shows WHICH
+    input patterns maximally excite it. If neurons have specialised, each
+    panel should highlight different digit structures.
+    """
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import TwoSlopeNorm
+
+    model.eval()
+    layer = model.hidden
+
+    # Collect all test activations and inputs
+    all_x, all_act = [], []
+    for x, _y in test_loader:
+        x = x.to(DEVICE)
+        act = layer(x)                           # (batch, num_neurons)
+        all_x.append(x.cpu())
+        all_act.append(act.cpu())
+    all_x = torch.cat(all_x, dim=0)              # (N, in_dim)
+    all_act = torch.cat(all_act, dim=0)           # (N, num_neurons)
+
+    num_neurons = all_act.shape[1]
+    n_show = min(num_neurons, max_neurons)
+    nrows = int(np.ceil(n_show / ncols))
+
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 1.8, nrows * 2.0))
+    axes = np.array(axes).reshape(-1)
+
+    for i in range(n_show):
+        # Find top-k inputs that most excite this neuron
+        _, top_indices = all_act[:, i].topk(min(topk, all_act.shape[0]))
+        # Average those inputs to get the neuron's "preferred stimulus"
+        preferred = all_x[top_indices].mean(dim=0).numpy().reshape(resolution, resolution)
+        vmax = max(np.abs(preferred).max(), 1e-8)
+        norm = TwoSlopeNorm(vmin=-vmax, vcenter=0, vmax=vmax)
+        axes[i].imshow(preferred, cmap="RdBu_r", norm=norm, interpolation="nearest")
+        axes[i].set_title(f"neuron {i}", fontsize=8)
+        axes[i].axis("off")
+
+    for j in range(n_show, len(axes)):
+        axes[j].axis("off")
+
+    fig.suptitle(title, fontsize=12, fontweight="bold", y=1.02)
+    fig.tight_layout()
+    path = os.path.join(_outdir(subdir), fname)
+    fig.savefig(path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  saved {path}")
+
+
+def run_and_visualize(arch, res, nc, hidden, epochs, local_weight=1.0,
+                      div_weight=0.0, schedule="interleaved", subdir="visualize"):
+    """Train a single model and produce both decoder-weight and activation
+    visualizations.  Returns the trained model for further inspection."""
+    tr, te, in_dim = get_loaders(resolution=res, num_classes=nc)
+    xb = next(iter(te))[0].to(DEVICE)
+    model = HiddenLayerClassifier(in_dim, hidden, nc, arch=arch).to(DEVICE)
+
+    if schedule == "interleaved":
+        run_interleaved(model, tr, te, xb, epochs, local_weight, div_weight)
+    else:
+        run_sequential(model, tr, te, xb, epochs // 2, epochs - epochs // 2,
+                       div_weight=div_weight, finetune=False)
+
+    # Decoder weight fields — what each neuron reconstructs
+    plot_neuron_decoders(
+        model, res,
+        fname=f"decoder_fields_{arch}.png",
+        title=f"Decoder weight fields — {arch} (what each neuron reconstructs)",
+        subdir=subdir)
+
+    # Activation maps — what inputs each neuron responds to most
+    plot_neuron_activations(
+        model, te, res,
+        fname=f"activation_maps_{arch}.png",
+        title=f"Preferred stimuli — {arch} (inputs that maximally excite each neuron)",
+        subdir=subdir)
+
+    # Also print the final metrics
+    m = metrics(model, te, xb)
+    ds = "n/a" if m["dec_sim"] < 0 else f"{m['dec_sim']:.3f}"
+    print(f"  [{arch}] final: acc={m['acc']:.1f}%  eff_rank={m['eff_rank']:.1f}  "
+          f"dec_sim={ds}  act_corr={m['act_corr']:.3f}")
+    return model
 
 
 # ==============================================================================
@@ -551,11 +718,11 @@ def exp_curves(seeds, epochs, res=14, nc=10, hidden=128, arch="static"):
         epochs // 2, epochs - epochs // 2, div_weight=5.0, finetune=False),
         seeds, in_dim, hidden, nc)
     curves = {"interleaved": inter, "sequential": seq, "sequential+penalty": seqp}
-    save_json(curves, f"curves_{arch}.json")
+    save_json(curves, f"curves_{arch}.json", subdir="curves")
     plot_curves(curves, "acc", "test accuracy (%)", f"curve_acc_{arch}.png",
-                f"Test accuracy over training ({arch})")
+                f"Test accuracy over training ({arch})", subdir="curves")
     plot_curves(curves, "eff_rank", "effective rank", f"curve_rank_{arch}.png",
-                f"Neuron diversity (effective rank) over training ({arch})")
+                f"Neuron diversity (effective rank) over training ({arch})", subdir="curves")
     return curves
 
 
@@ -579,10 +746,11 @@ def exp_sweep(kind, values, seeds, epochs, res=14, nc=10, hidden=128, arch="stat
         rank_m.append(agg["eff_rank"]["mean"][-1]); rank_s.append(agg["eff_rank"]["sem"][-1])
     res_obj = {"values": values, "acc_mean": acc_m, "acc_sem": acc_s,
                "rank_mean": rank_m, "rank_sem": rank_s}
-    save_json(res_obj, f"sweep_{kind}_{arch}.json")
+    sweep_subdir = f"{kind}_sweep"
+    save_json(res_obj, f"sweep_{kind}_{arch}.json", subdir=sweep_subdir)
     xlabel = "diversity weight" if kind == "div" else "local (reconstruction) weight"
     plot_sweep(values, res_obj, xlabel, f"sweep_{kind}_{arch}.png",
-               f"Final accuracy & neuron diversity vs {xlabel} ({arch})")
+              f"Final accuracy & neuron diversity vs {xlabel} ({arch})", subdir=sweep_subdir)
     return res_obj
 
 
@@ -603,7 +771,7 @@ def exp_seq_variants(seeds, epochs, res=14, nc=10, hidden=128, arch="static"):
             grid[name] = {"acc": agg["acc"]["mean"][-1],
                           "acc_sem": agg["acc"]["sem"][-1],
                           "eff_rank": agg["eff_rank"]["mean"][-1]}
-    save_json(grid, f"seq_variants_{arch}.json")
+    save_json(grid, f"seq_variants_{arch}.json", subdir="seq_variants")
     print(f"\n  2x2 sequential variants ({arch}, final):")
     print(f"  {'variant':20} {'acc':>8} {'+-sem':>7} {'eff_rank':>9}")
     for k, v in grid.items():
@@ -613,52 +781,107 @@ def exp_seq_variants(seeds, epochs, res=14, nc=10, hidden=128, arch="static"):
 
 # ==============================================================================
 if __name__ == "__main__":
-    MODE = "demo"   # "demo"|"curves"|"div_sweep"|"local_sweep"|"seq_variants"|"compare_arch"|"compare_all4"
-    ARCH = "static" # "static"(NAN) | "spiking"(spiking NAN) | "ann"(shared decoder) | "nn"(plain baseline)
-    t0 = time.time()
-    print(f"device={DEVICE} mode={MODE} arch={ARCH}")
+    import argparse
+    parser = argparse.ArgumentParser(
+        description="Neuron-autoencoder experiment harness. Pick a mode and "
+                    "(optionally) an architecture; results land in ./experiments/.")
+    parser.add_argument("--mode", default="demo",
+                        choices=["demo", "curves", "div_sweep", "local_sweep",
+                                 "seq_variants", "compare_arch", "compare_all4",
+                                 "visualize", "visualize_all"],
+                        help="which experiment to run")
+    parser.add_argument("--arch", default="static",
+                        choices=["static", "spiking", "ann", "nn"],
+                        help="hidden-layer architecture for single-arch modes")
+    parser.add_argument("--seeds", type=int, default=5,
+                        help="number of random seeds to average over")
+    parser.add_argument("--epochs", type=int, default=10,
+                        help="training epochs (sweeps use ~60%% of this)")
+    parser.add_argument("--res", type=int, default=14,
+                        help="MNIST resolution (the N-axis): 7, 14 or 28")
+    parser.add_argument("--classes", type=int, default=10,
+                        help="number of digit classes to keep (2..10)")
+    parser.add_argument("--hidden", type=int, default=128,
+                        help="hidden-layer width")
+    args = parser.parse_args()
 
-    if MODE == "demo":
+    seeds = range(args.seeds)
+    sweep_epochs = max(1, int(args.epochs * 0.6))   # sweeps need fewer epochs
+    t0 = time.time()
+    print(f"device={DEVICE} mode={args.mode} arch={args.arch} "
+          f"seeds={args.seeds} epochs={args.epochs} res={args.res} "
+          f"classes={args.classes} hidden={args.hidden}")
+
+    if args.mode == "demo":
         # tiny everything, run BOTH NAN archs so directive compliance is visible
         exp_curves(seeds=[0, 1], epochs=2, res=7, nc=10, hidden=64, arch="static")
         exp_curves(seeds=[0, 1], epochs=2, res=7, nc=10, hidden=64, arch="spiking")
 
-    elif MODE == "curves":
-        exp_curves(seeds=range(5), epochs=10, arch=ARCH)
+    elif args.mode == "curves":
+        exp_curves(seeds=seeds, epochs=args.epochs, res=args.res,
+                   nc=args.classes, hidden=args.hidden, arch=args.arch)
 
-    elif MODE == "div_sweep":
-        exp_sweep("div", [0, 0.1, 0.5, 1, 2, 5, 10, 20], seeds=range(5), epochs=6, arch=ARCH)
+    elif args.mode == "div_sweep":
+        exp_sweep("div", [0, 0.1, 0.5, 1, 2, 5, 10, 20], seeds=seeds,
+                  epochs=sweep_epochs, res=args.res, nc=args.classes,
+                  hidden=args.hidden, arch=args.arch)
 
-    elif MODE == "local_sweep":
-        exp_sweep("local", [0, 0.1, 0.25, 0.5, 1, 2, 4], seeds=range(5), epochs=6, arch=ARCH)
+    elif args.mode == "local_sweep":
+        exp_sweep("local", [0, 0.1, 0.25, 0.5, 1, 2, 4], seeds=seeds,
+                  epochs=sweep_epochs, res=args.res, nc=args.classes,
+                  hidden=args.hidden, arch=args.arch)
 
-    elif MODE == "seq_variants":
-        exp_seq_variants(seeds=range(5), epochs=10, arch=ARCH)
+    elif args.mode == "seq_variants":
+        exp_seq_variants(seeds=seeds, epochs=args.epochs, res=args.res,
+                         nc=args.classes, hidden=args.hidden, arch=args.arch)
 
-    elif MODE == "compare_arch":
+    elif args.mode == "compare_arch":
         # same experiment for both NAN neuron models: static vs spiking
         for a in ("static", "spiking"):
-            exp_seq_variants(seeds=range(5), epochs=10, arch=a)
-            exp_sweep("div", [0, 0.5, 1, 2, 5, 10], seeds=range(5), epochs=6, arch=a)
+            exp_seq_variants(seeds=seeds, epochs=args.epochs, res=args.res,
+                             nc=args.classes, hidden=args.hidden, arch=a)
+            exp_sweep("div", [0, 0.5, 1, 2, 5, 10], seeds=seeds,
+                      epochs=sweep_epochs, res=args.res, nc=args.classes,
+                      hidden=args.hidden, arch=a)
 
-    elif MODE == "compare_all4":
+    elif args.mode == "compare_all4":
         # the paper's full architecture comparison: NN vs ANN vs NAN(static) vs
         # NAN(spiking), interleaved training, final accuracy + diversity per arch.
-        tr, te, in_dim = get_loaders(resolution=14, num_classes=10)
+        tr, te, in_dim = get_loaders(resolution=args.res, num_classes=args.classes)
         xb = next(iter(te))[0].to(DEVICE)
         print(f"\n  {'arch':10} {'acc':>8} {'+-sem':>7} {'eff_rank':>9} {'dec_sim':>8}")
         summary = {}
         for a in ("nn", "ann", "static", "spiking"):
-            # nn uses local_weight irrelevant (its local_loss is 0); others use 1.0
             agg = multiseed(lambda s: run_interleaved(
-                NAN_Classifier(in_dim, 128, 10, arch=a).to(DEVICE),
-                tr, te, xb, epochs=10, local_weight=1.0), range(5), in_dim, 128, 10)
+                HiddenLayerClassifier(in_dim, args.hidden, args.classes, arch=a).to(DEVICE),
+                tr, te, xb, epochs=args.epochs, local_weight=1.0),
+                seeds, in_dim, args.hidden, args.classes)
             summary[a] = {"acc": agg["acc"]["mean"][-1], "acc_sem": agg["acc"]["sem"][-1],
                           "eff_rank": agg["eff_rank"]["mean"][-1],
                           "dec_sim": agg["dec_sim"]["mean"][-1]}
             v = summary[a]
             ds = "n/a" if v["dec_sim"] < 0 else f"{v['dec_sim']:.3f}"
             print(f"  {a:10} {v['acc']:>8.2f} {v['acc_sem']:>7.2f} {v['eff_rank']:>9.1f} {ds:>8}")
-        save_json(summary, "compare_all4.json")
+        save_json(summary, "compare_all4.json", subdir="compare_all4")
+
+    elif args.mode == "visualize":
+        # Train a single model and generate neuron-level visualizations
+        print(f">>> visualize: training {args.arch} and generating neuron plots")
+        torch.manual_seed(42)
+        np.random.seed(42)
+        run_and_visualize(arch=args.arch, res=args.res, nc=args.classes,
+                          hidden=args.hidden, epochs=args.epochs,
+                          subdir="visualize")
+
+    elif args.mode == "visualize_all":
+        # Visualize all four architectures side-by-side for comparison
+        print(">>> visualize_all: training all architectures and generating neuron plots")
+        for a in ("nn", "ann", "static", "spiking"):
+            print(f"\n  --- {a} ---")
+            torch.manual_seed(42)
+            np.random.seed(42)
+            run_and_visualize(arch=a, res=args.res, nc=args.classes,
+                              hidden=args.hidden, epochs=args.epochs,
+                              subdir="visualize")
 
     print(f"\ndone in {time.time()-t0:.1f}s. Outputs in ./{OUT}/")
