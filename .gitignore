@@ -1,0 +1,42 @@
+# =============================================================================
+# .gitignore — Autoencoder Internship Project
+# =============================================================================
+
+# ----- Internal documentation (not for the public repo) -----
+Important mds/
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ----- Data & model artifacts -----
+data/
+*.pt
+*.pth
+*.ckpt
+
+# ----- Experiment outputs -----
+experiments/
+experiments_h*/
+experiments_fashion_h*/
+logs/
+
+# ----- Archives -----
+*.zip
+
+# ----- OS / Editor -----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# ----- Backup files -----
+*.bak

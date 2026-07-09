@@ -430,9 +430,70 @@ def run_sequential(model, train_loader, test_loader, probe_batch,
     return history
 
 
-# ==============================================================================
-# Multi-seed wrapper: returns per-epoch mean and standard error for each metric
-# ==============================================================================
+def run_warmup_interleaved(model, train_loader, test_loader, probe_batch,
+                           warmup_epochs, interleaved_epochs,
+                           local_weight=1.0, div_weight=5.0, penalty="decoder"):
+    """
+    Hybrid schedule: a reconstruction WARM-UP, then full interleaved training.
+
+    Phase 1 (warm-up): train ONLY the autoencoders, WITH the diversity penalty,
+        to reach a good, decorrelated starting representation. No task signal,
+        head idle (accuracy at chance) -- same as sequential's phase 1.
+    Phase 2 (interleaved): hand off to the normal interleaved schedule (coin-flip
+        task / reconstruction every batch), which keeps neurons diverse on its
+        own. Nothing is frozen here -- the whole network trains.
+
+    Hypothesis: warm-starting from a structured, decorrelated representation, then
+    letting interleaved training take over, gets the benefit of a good init
+    without the collapse risk of freezing. Sits between the existing two schedules.
+    Metrics logged every epoch across both phases (phase markers 1 then 2).
+    """
+    penalty_fn = PENALTIES[penalty]
+    history = []
+
+    # ---- Phase 1: AE warm-up with the diversity penalty -------------------
+    first_batch = next(iter(train_loader))[0].to(DEVICE)
+    has_autoencoder = model.hidden.local_loss(first_batch).requires_grad
+    warmup_optimizer = torch.optim.Adam(model.hidden.parameters(), lr=1e-3)
+    for _epoch in range(warmup_epochs):
+        model.train()
+        if has_autoencoder:
+            for x, _y in train_loader:
+                x = x.to(DEVICE)
+                warmup_optimizer.zero_grad()
+                loss = model.hidden.local_loss(x)
+                if div_weight > 0:
+                    loss = loss + div_weight * penalty_fn(model.hidden, x)
+                loss.backward()
+                warmup_optimizer.step()
+        history.append({**metrics(model, test_loader, probe_batch), "phase": 1})
+
+    # ---- Phase 2: full interleaved training (whole network trainable) -----
+    # one optimiser over ALL parameters, exactly like run_interleaved
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+    for _epoch in range(interleaved_epochs):
+        model.train()
+        for x, y in train_loader:
+            x, y = x.to(DEVICE), y.to(DEVICE)
+            run_task_cycle = local_weight == 0 or torch.rand(1).item() < 0.5
+            if run_task_cycle:
+                optimizer.zero_grad()
+                F.cross_entropy(model(x), y).backward()
+                optimizer.step()
+            else:
+                optimizer.zero_grad()
+                _, recon_loss = model(x, want_local=True)
+                loss = local_weight * recon_loss
+                if div_weight > 0:
+                    loss = loss + div_weight * penalty_fn(model.hidden, x)
+                if loss.requires_grad:
+                    loss.backward()
+                    optimizer.step()
+                else:
+                    F.cross_entropy(model(x), y).backward()
+                    optimizer.step()
+        history.append({**metrics(model, test_loader, probe_batch), "phase": 2})
+    return history
 def multiseed(make_and_run, seeds, in_dim, hidden, num_classes):
     """Run an experiment once per seed and aggregate the per-epoch metrics into
     a mean and standard-error curve.
@@ -717,7 +778,13 @@ def exp_curves(seeds, epochs, res=14, nc=10, hidden=128, arch="static"):
         NAN_Classifier(in_dim, hidden, nc, arch=arch).to(DEVICE), tr, te, xb,
         epochs // 2, epochs - epochs // 2, div_weight=5.0, finetune=False),
         seeds, in_dim, hidden, nc)
-    curves = {"interleaved": inter, "sequential": seq, "sequential+penalty": seqp}
+    print(f"exp_curves [{arch}]: warm-up then interleaved ...")
+    warm = multiseed(lambda s: run_warmup_interleaved(
+        NAN_Classifier(in_dim, hidden, nc, arch=arch).to(DEVICE), tr, te, xb,
+        epochs // 2, epochs - epochs // 2, div_weight=5.0),
+        seeds, in_dim, hidden, nc)
+    curves = {"interleaved": inter, "sequential": seq,
+              "sequential+penalty": seqp, "warmup+interleaved": warm}
     save_json(curves, f"curves_{arch}.json", subdir="curves")
     plot_curves(curves, "acc", "test accuracy (%)", f"curve_acc_{arch}.png",
                 f"Test accuracy over training ({arch})", subdir="curves")
@@ -726,31 +793,80 @@ def exp_curves(seeds, epochs, res=14, nc=10, hidden=128, arch="static"):
     return curves
 
 
-def exp_sweep(kind, values, seeds, epochs, res=14, nc=10, hidden=128, arch="static"):
+def exp_schedule_compare(seeds, epochs, res=14, nc=10, hidden=128, arch="static"):
+    """Focused three-way comparison of the training SCHEDULES, your hybrid idea
+    vs the two it sits between:
+        interleaved        - coin-flip task/reconstruction every batch (baseline)
+        sequential         - pure sequential: AE-only phase, then FROZEN task phase
+        warmup+interleaved - the hybrid: penalised AE warm-up, THEN interleaved
+    Pure sequential here is the frozen, no-penalty variant (the collapse case),
+    so the plot shows the hybrid against both the healthy baseline and the failure
+    mode. Output goes to its own 'schedule_compare' subdir, separate from the
+    four-line curves plot, so this comparison reads cleanly on its own.
+    """
+    tr, te, in_dim = get_loaders(resolution=res, num_classes=nc)
+    xb = next(iter(te))[0].to(DEVICE)
+
+    print(f"exp_schedule_compare [{arch}]: interleaved ...")
+    inter = multiseed(lambda s: run_interleaved(
+        NAN_Classifier(in_dim, hidden, nc, arch=arch).to(DEVICE), tr, te, xb, epochs, 1.0),
+        seeds, in_dim, hidden, nc)
+    print(f"exp_schedule_compare [{arch}]: pure sequential (frozen) ...")
+    seq = multiseed(lambda s: run_sequential(
+        NAN_Classifier(in_dim, hidden, nc, arch=arch).to(DEVICE), tr, te, xb,
+        epochs // 2, epochs - epochs // 2, div_weight=0.0, finetune=False),
+        seeds, in_dim, hidden, nc)
+    print(f"exp_schedule_compare [{arch}]: hybrid (warm-up then interleaved) ...")
+    warm = multiseed(lambda s: run_warmup_interleaved(
+        NAN_Classifier(in_dim, hidden, nc, arch=arch).to(DEVICE), tr, te, xb,
+        epochs // 2, epochs - epochs // 2, div_weight=5.0),
+        seeds, in_dim, hidden, nc)
+
+    curves = {"interleaved": inter, "pure sequential": seq, "hybrid (warm-up+interleaved)": warm}
+    save_json(curves, f"schedule_compare_{arch}.json", subdir="schedule_compare")
+    plot_curves(curves, "acc", "test accuracy (%)", f"schedule_acc_{arch}.png",
+                f"Schedule comparison: accuracy over training ({arch})", subdir="schedule_compare")
+    plot_curves(curves, "eff_rank", "effective rank", f"schedule_rank_{arch}.png",
+                f"Schedule comparison: neuron diversity over training ({arch})", subdir="schedule_compare")
+    # concise final-epoch summary to the log
+    print(f"\n  schedule comparison ({arch}, final epoch):")
+    print(f"  {'schedule':30} {'acc':>8} {'eff_rank':>9}")
+    for name, agg in curves.items():
+        print(f"  {name:30} {agg['acc']['mean'][-1]:>8.2f} {agg['eff_rank']['mean'][-1]:>9.1f}")
+    return curves
+
+
+def exp_sweep(kind, values, seeds, epochs, res=14, nc=10, hidden=128, arch="static",
+              penalty="decoder"):
     """Sweep div_weight (kind='div') or local_weight (kind='local').
     Records FINAL accuracy and eff-rank (mean+sem over seeds) per value.
-    arch: "static" or "spiking"."""
+    arch: "static" or "spiking".  penalty: which diversity penalty to apply when
+    kind='div' ("decoder" = weight decorrelation, "activation" = Barlow-Twins)."""
     tr, te, in_dim = get_loaders(resolution=res, num_classes=nc)
     xb = next(iter(te))[0].to(DEVICE)
     acc_m, acc_s, rank_m, rank_s = [], [], [], []
     for v in values:
-        print(f"exp_sweep[{kind}/{arch}]: value={v} ...")
+        print(f"exp_sweep[{kind}/{arch}/{penalty}]: value={v} ...")
         def run(s):
             m = NAN_Classifier(in_dim, hidden, nc, arch=arch).to(DEVICE)
-            if kind == "div":   # interleaved, vary diversity penalty
-                return run_interleaved(m, tr, te, xb, epochs, 1.0, div_weight=v)
+            if kind == "div":   # interleaved, vary diversity penalty (chosen formulation)
+                return run_interleaved(m, tr, te, xb, epochs, 1.0, div_weight=v,
+                                       penalty=penalty)
             else:               # vary local (reconstruction) weight, no penalty
                 return run_interleaved(m, tr, te, xb, epochs, v, div_weight=0.0)
         agg = multiseed(run, seeds, in_dim, hidden, nc)
         acc_m.append(agg["acc"]["mean"][-1]);  acc_s.append(agg["acc"]["sem"][-1])
         rank_m.append(agg["eff_rank"]["mean"][-1]); rank_s.append(agg["eff_rank"]["sem"][-1])
     res_obj = {"values": values, "acc_mean": acc_m, "acc_sem": acc_s,
-               "rank_mean": rank_m, "rank_sem": rank_s}
+               "rank_mean": rank_m, "rank_sem": rank_s, "penalty": penalty}
     sweep_subdir = f"{kind}_sweep"
-    save_json(res_obj, f"sweep_{kind}_{arch}.json", subdir=sweep_subdir)
+    # tag div-sweep files by penalty so "decoder" and "activation" runs coexist
+    tag = f"{arch}_{penalty}" if kind == "div" else arch
+    save_json(res_obj, f"sweep_{kind}_{tag}.json", subdir=sweep_subdir)
+    pen_label = f", {penalty} penalty" if kind == "div" else ""
     xlabel = "diversity weight" if kind == "div" else "local (reconstruction) weight"
-    plot_sweep(values, res_obj, xlabel, f"sweep_{kind}_{arch}.png",
-              f"Final accuracy & neuron diversity vs {xlabel} ({arch})", subdir=sweep_subdir)
+    plot_sweep(values, res_obj, xlabel, f"sweep_{kind}_{tag}.png",
+              f"Final accuracy & neuron diversity vs {xlabel} ({arch}{pen_label})", subdir=sweep_subdir)
     return res_obj
 
 
@@ -788,7 +904,7 @@ if __name__ == "__main__":
     parser.add_argument("--mode", default="demo",
                         choices=["demo", "curves", "div_sweep", "local_sweep",
                                  "seq_variants", "compare_arch", "compare_all4",
-                                 "visualize", "visualize_all"],
+                                 "visualize", "visualize_all", "schedule_compare"],
                         help="which experiment to run")
     parser.add_argument("--arch", default="static",
                         choices=["static", "spiking", "ann", "nn"],
@@ -803,6 +919,11 @@ if __name__ == "__main__":
                         help="number of digit classes to keep (2..10)")
     parser.add_argument("--hidden", type=int, default=128,
                         help="hidden-layer width")
+    parser.add_argument("--penalty", default="decoder",
+                        choices=["decoder", "activation"],
+                        help="diversity penalty formulation for div_sweep: "
+                             "'decoder' = weight decorrelation (original), "
+                             "'activation' = Barlow-Twins representation decorrelation")
     args = parser.parse_args()
 
     seeds = range(args.seeds)
@@ -821,10 +942,14 @@ if __name__ == "__main__":
         exp_curves(seeds=seeds, epochs=args.epochs, res=args.res,
                    nc=args.classes, hidden=args.hidden, arch=args.arch)
 
+    elif args.mode == "schedule_compare":
+        exp_schedule_compare(seeds=seeds, epochs=args.epochs, res=args.res,
+                             nc=args.classes, hidden=args.hidden, arch=args.arch)
+
     elif args.mode == "div_sweep":
         exp_sweep("div", [0, 0.1, 0.5, 1, 2, 5, 10, 20], seeds=seeds,
                   epochs=sweep_epochs, res=args.res, nc=args.classes,
-                  hidden=args.hidden, arch=args.arch)
+                  hidden=args.hidden, arch=args.arch, penalty=args.penalty)
 
     elif args.mode == "local_sweep":
         exp_sweep("local", [0, 0.1, 0.25, 0.5, 1, 2, 4], seeds=seeds,
