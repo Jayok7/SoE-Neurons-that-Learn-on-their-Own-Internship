@@ -1,0 +1,265 @@
+==========================================
+Job: fashion-nan-sweeps | ID: 17199969
+Node: node869.csf3.man.alces.network | Started: Wed  8 Jul 01:00:13 BST 2026
+==========================================
+Wed Jul  8 01:00:13 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    On  |   00000000:4A:00.0 Off |                    0 |
+| N/A   36C    P0             84W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+torch 2.5.1+cu121 | CUDA available: True
+Hidden width = 128  ->  results in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128
+>>> [1/7] curves: static, spiking, ann, nn
+    curves arch=static
+device=cuda mode=curves arch=static seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_curves [static]: interleaved ...
+exp_curves [static]: sequential (frozen, no penalty) ...
+exp_curves [static]: sequential (frozen + diversity penalty) ...
+exp_curves [static]: warm-up then interleaved ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curves_static.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_acc_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_rank_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_recon_static.png
+
+done in 463.1s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+    curves arch=spiking
+device=cuda mode=curves arch=spiking seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_curves [spiking]: interleaved ...
+exp_curves [spiking]: sequential (frozen, no penalty) ...
+exp_curves [spiking]: sequential (frozen + diversity penalty) ...
+exp_curves [spiking]: warm-up then interleaved ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curves_spiking.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_acc_spiking.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_rank_spiking.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_recon_spiking.png
+
+done in 1398.0s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+    curves arch=ann
+device=cuda mode=curves arch=ann seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_curves [ann]: interleaved ...
+exp_curves [ann]: sequential (frozen, no penalty) ...
+exp_curves [ann]: sequential (frozen + diversity penalty) ...
+exp_curves [ann]: warm-up then interleaved ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curves_ann.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_acc_ann.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_rank_ann.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_recon_ann.png
+
+done in 439.3s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+    curves arch=nn
+device=cuda mode=curves arch=nn seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_curves [nn]: interleaved ...
+exp_curves [nn]: sequential (frozen, no penalty) ...
+exp_curves [nn]: sequential (frozen + diversity penalty) ...
+exp_curves [nn]: warm-up then interleaved ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curves_nn.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_acc_nn.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_rank_nn.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/curves/curve_recon_nn.png
+
+done in 251.5s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+>>> [2/7] diversity-weight sweep: static, spiking x {decoder, activation} penalty
+    div_sweep arch=static penalty=decoder
+device=cuda mode=div_sweep arch=static seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_sweep[div/static/decoder]: value=0 ...
+exp_sweep[div/static/decoder]: value=0.1 ...
+exp_sweep[div/static/decoder]: value=0.5 ...
+exp_sweep[div/static/decoder]: value=1 ...
+exp_sweep[div/static/decoder]: value=2 ...
+exp_sweep[div/static/decoder]: value=5 ...
+exp_sweep[div/static/decoder]: value=10 ...
+exp_sweep[div/static/decoder]: value=20 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/div_sweep/sweep_div_static_decoder.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/div_sweep/sweep_div_static_decoder.png
+
+done in 595.2s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+    div_sweep arch=static penalty=activation
+device=cuda mode=div_sweep arch=static seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_sweep[div/static/activation]: value=0 ...
+exp_sweep[div/static/activation]: value=0.1 ...
+exp_sweep[div/static/activation]: value=0.5 ...
+exp_sweep[div/static/activation]: value=1 ...
+exp_sweep[div/static/activation]: value=2 ...
+exp_sweep[div/static/activation]: value=5 ...
+exp_sweep[div/static/activation]: value=10 ...
+exp_sweep[div/static/activation]: value=20 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/div_sweep/sweep_div_static_activation.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/div_sweep/sweep_div_static_activation.png
+
+done in 613.3s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+    div_sweep arch=spiking penalty=decoder
+device=cuda mode=div_sweep arch=spiking seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_sweep[div/spiking/decoder]: value=0 ...
+exp_sweep[div/spiking/decoder]: value=0.1 ...
+exp_sweep[div/spiking/decoder]: value=0.5 ...
+exp_sweep[div/spiking/decoder]: value=1 ...
+exp_sweep[div/spiking/decoder]: value=2 ...
+exp_sweep[div/spiking/decoder]: value=5 ...
+exp_sweep[div/spiking/decoder]: value=10 ...
+exp_sweep[div/spiking/decoder]: value=20 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/div_sweep/sweep_div_spiking_decoder.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/div_sweep/sweep_div_spiking_decoder.png
+
+done in 2056.4s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+    div_sweep arch=spiking penalty=activation
+device=cuda mode=div_sweep arch=spiking seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_sweep[div/spiking/activation]: value=0 ...
+exp_sweep[div/spiking/activation]: value=0.1 ...
+exp_sweep[div/spiking/activation]: value=0.5 ...
+exp_sweep[div/spiking/activation]: value=1 ...
+exp_sweep[div/spiking/activation]: value=2 ...
+exp_sweep[div/spiking/activation]: value=5 ...
+exp_sweep[div/spiking/activation]: value=10 ...
+exp_sweep[div/spiking/activation]: value=20 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/div_sweep/sweep_div_spiking_activation.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/div_sweep/sweep_div_spiking_activation.png
+
+done in 2541.5s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+>>> [3/7] local-weight sweep: static, spiking
+    local_sweep arch=static
+device=cuda mode=local_sweep arch=static seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_sweep[local/static/decoder]: value=0 ...
+exp_sweep[local/static/decoder]: value=0.1 ...
+exp_sweep[local/static/decoder]: value=0.25 ...
+exp_sweep[local/static/decoder]: value=0.5 ...
+exp_sweep[local/static/decoder]: value=1 ...
+exp_sweep[local/static/decoder]: value=2 ...
+exp_sweep[local/static/decoder]: value=4 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/local_sweep/sweep_local_static.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/local_sweep/sweep_local_static.png
+
+done in 447.0s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+    local_sweep arch=spiking
+device=cuda mode=local_sweep arch=spiking seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_sweep[local/spiking/decoder]: value=0 ...
+exp_sweep[local/spiking/decoder]: value=0.1 ...
+exp_sweep[local/spiking/decoder]: value=0.25 ...
+exp_sweep[local/spiking/decoder]: value=0.5 ...
+exp_sweep[local/spiking/decoder]: value=1 ...
+exp_sweep[local/spiking/decoder]: value=2 ...
+exp_sweep[local/spiking/decoder]: value=4 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/local_sweep/sweep_local_spiking.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/local_sweep/sweep_local_spiking.png
+
+done in 1698.7s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+>>> [4/7] sequential variants: static, spiking
+    seq_variants arch=static
+device=cuda mode=seq_variants arch=static seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_seq_variants [static]: freeze+nopen ...
+exp_seq_variants [static]: freeze+pen ...
+exp_seq_variants [static]: finetune+nopen ...
+exp_seq_variants [static]: finetune+pen ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/seq_variants/seq_variants_static.json
+
+  2x2 sequential variants (static, final):
+  variant                   acc   +-sem  eff_rank
+  freeze+nopen            27.88    0.38       1.7
+  freeze+pen              76.99    0.14      37.1
+  finetune+nopen          83.50    0.05      28.0
+  finetune+pen            84.06    0.04      36.7
+
+done in 438.1s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+    seq_variants arch=spiking
+device=cuda mode=seq_variants arch=spiking seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_seq_variants [spiking]: freeze+nopen ...
+exp_seq_variants [spiking]: freeze+pen ...
+exp_seq_variants [spiking]: finetune+nopen ...
+exp_seq_variants [spiking]: finetune+pen ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/seq_variants/seq_variants_spiking.json
+
+  2x2 sequential variants (spiking, final):
+  variant                   acc   +-sem  eff_rank
+  freeze+nopen            40.10    0.28       9.6
+  freeze+pen              80.38    0.08      64.7
+  finetune+nopen          85.15    0.04      51.0
+  finetune+pen            86.19    0.04      61.5
+
+done in 1334.2s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+>>> [5/7] four-architecture comparison table
+device=cuda mode=compare_all4 arch=static seeds=10 epochs=15 res=28 classes=10 hidden=128
+
+  arch            acc   +-sem  eff_rank  dec_sim
+  nn            87.93    0.08      55.7      n/a
+  ann           87.01    0.09      53.6      n/a
+  static        87.03    0.06      50.3    0.571
+  spiking       86.52    0.09      62.6    0.553
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/compare_all4/compare_all4.json
+
+done in 711.1s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+>>> [6/7] neuron visualizations (all architectures)
+device=cuda mode=visualize_all arch=static seeds=5 epochs=15 res=28 classes=10 hidden=128
+>>> visualize_all: training all architectures and generating neuron plots
+
+  --- nn ---
+  [plot_neuron_decoders] skipping — not a per-neuron decoder (PlainNNLayer)
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/visualize/activation_maps_nn.png
+  [nn] final: acc=88.0%  eff_rank=55.2  dec_sim=n/a  act_corr=0.313  recon_mse=n/a
+
+  --- ann ---
+  [plot_neuron_decoders] skipping — not a per-neuron decoder (LayerAELayer)
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/visualize/activation_maps_ann.png
+  [ann] final: acc=87.2%  eff_rank=54.0  dec_sim=n/a  act_corr=0.310  recon_mse=0.0208
+
+  --- static ---
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/visualize/decoder_fields_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/visualize/activation_maps_static.png
+  [static] final: acc=87.1%  eff_rank=51.0  dec_sim=0.588  act_corr=0.355  recon_mse=0.0776
+
+  --- spiking ---
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/visualize/decoder_fields_spiking.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/visualize/activation_maps_spiking.png
+  [spiking] final: acc=86.6%  eff_rank=64.2  dec_sim=0.580  act_corr=0.266  recon_mse=0.0796
+
+done in 95.4s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+>>> [7/7] schedule comparison: hybrid vs interleaved vs pure sequential
+    schedule_compare arch=static
+device=cuda mode=schedule_compare arch=static seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_schedule_compare [static]: interleaved ...
+exp_schedule_compare [static]: pure sequential (frozen) ...
+exp_schedule_compare [static]: hybrid (warm-up then interleaved) ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/schedule_compare/schedule_compare_static.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/schedule_compare/schedule_acc_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/schedule_compare/schedule_rank_static.png
+
+  schedule comparison (static, final epoch):
+  schedule                            acc  eff_rank
+  interleaved                       87.03      50.3
+  pure sequential                   27.88       1.7
+  hybrid (warm-up+interleaved)      85.82      46.6
+
+done in 342.6s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+    schedule_compare arch=spiking
+device=cuda mode=schedule_compare arch=spiking seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_schedule_compare [spiking]: interleaved ...
+exp_schedule_compare [spiking]: pure sequential (frozen) ...
+exp_schedule_compare [spiking]: hybrid (warm-up then interleaved) ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/schedule_compare/schedule_compare_spiking.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/schedule_compare/schedule_acc_spiking.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/schedule_compare/schedule_rank_spiking.png
+
+  schedule comparison (spiking, final epoch):
+  schedule                            acc  eff_rank
+  interleaved                       86.52      62.6
+  pure sequential                   40.10       9.6
+  hybrid (warm-up+interleaved)      85.65      62.3
+
+done in 1117.8s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+==========================================
+All experiments done — Wed  8 Jul 05:03:33 BST 2026
+Results in: /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128
+==========================================

@@ -1,0 +1,6 @@
+==========================================
+Job: fashion-extra-sweeps | ID: 17406289
+Node: node874.csf3.man.alces.network | Started: Thu  9 Jul 19:31:12 BST 2026
+mode=combined arch=static hidden=128 seeds=5 epochs=9 res=14
+output -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps
+

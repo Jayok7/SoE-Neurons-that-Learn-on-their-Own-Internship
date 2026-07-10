@@ -1,0 +1,26 @@
+{
+  "nn": {
+    "mean_epoch_time": 0.717913293838501,
+    "final_val_acc": 0.8784,
+    "final_val_top2": 0.9646,
+    "final_macro_f1": 0.8783563033714816
+  },
+  "ann": {
+    "mean_epoch_time": 0.8103209813435872,
+    "final_val_acc": 0.8787,
+    "final_val_top2": 0.9646,
+    "final_macro_f1": 0.8785563759274894
+  },
+  "static": {
+    "mean_epoch_time": 0.9301673889160156,
+    "final_val_acc": 0.882,
+    "final_val_top2": 0.9644,
+    "final_macro_f1": 0.880713428097675
+  },
+  "spiking": {
+    "mean_epoch_time": 4.144052807490031,
+    "final_val_acc": 0.8764,
+    "final_val_top2": 0.9641,
+    "final_macro_f1": 0.8768043928818674
+  }
+}

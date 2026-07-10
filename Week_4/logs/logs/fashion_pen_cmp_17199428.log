@@ -1,0 +1,64 @@
+==========================================
+Job: nan-fashion-pen-cmp | ID: 17199428
+Node: node868.csf3.man.alces.network | Started: Wed  8 Jul 00:31:13 BST 2026
+Dataset=Fashion-MNIST  Hidden=128  DIV_WEIGHT=0
+==========================================
+Wed Jul  8 00:31:13 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    Off |   00000000:CA:00.0 Off |                    0 |
+| N/A   30C    P0             77W /  350W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+torch 2.5.1+cu121 | CUDA available: True
+>>> penalised_compare arch=static dw=0 hidden=128 (Fashion-MNIST)
+device=cuda mode=penalised_compare arch=static seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_penalised_schedule_compare [static, dw=0.0]: interleaved ...
+exp_penalised_schedule_compare [static, dw=0.0]: sequential (finetune) ...
+exp_penalised_schedule_compare [static, dw=0.0]: hybrid (warm-up + interleaved) ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/penalised_compare/penalised_compare_static_dw0p0.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/penalised_compare/penalised_acc_static_dw0p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/penalised_compare/penalised_rank_static_dw0p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/penalised_compare/penalised_grid_static_dw0p0.png
+
+  penalised schedule comparison (static, dw=0.0, final epoch):
+  schedule                                 acc  eff_rank
+  interleaved                            87.03      50.3
+  sequential (finetune)                  83.50      28.0
+  hybrid (warm-up+interleaved)           85.61      46.2
+
+done in 354.8s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+>>> penalised_compare arch=spiking dw=0 hidden=128 (Fashion-MNIST)
+device=cuda mode=penalised_compare arch=spiking seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_penalised_schedule_compare [spiking, dw=0.0]: interleaved ...
+exp_penalised_schedule_compare [spiking, dw=0.0]: sequential (finetune) ...
+exp_penalised_schedule_compare [spiking, dw=0.0]: hybrid (warm-up + interleaved) ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/penalised_compare/penalised_compare_spiking_dw0p0.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/penalised_compare/penalised_acc_spiking_dw0p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/penalised_compare/penalised_rank_spiking_dw0p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/penalised_compare/penalised_grid_spiking_dw0p0.png
+
+  penalised schedule comparison (spiking, dw=0.0, final epoch):
+  schedule                                 acc  eff_rank
+  interleaved                            86.52      62.6
+  sequential (finetune)                  85.15      51.0
+  hybrid (warm-up+interleaved)           85.62      61.0
+
+done in 1162.0s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/
+==========================================
+Fashion-MNIST penalised schedule comparison done — Wed  8 Jul 00:57:48 BST 2026
+Results in: /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/penalised_compare/
+==========================================

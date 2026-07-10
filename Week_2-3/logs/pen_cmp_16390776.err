@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/Week_2/run_experiments.py", line 172, in <module>
+    main()
+  File "/mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/Week_2/run_experiments.py", line 164, in main
+    exp_penalised_schedule_compare(
+  File "/mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/Week_2/experiments.py", line 695, in exp_penalised_schedule_compare
+    xb = next(iter(te))[0].to(DEVICE)
+RuntimeError: CUDA error: uncorrectable ECC error encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

@@ -1,0 +1,64 @@
+==========================================
+Job: nan-pen-cmp | ID: 16390866
+Node: node879.csf3.man.alces.network | Started: Mon 22 Jun 22:15:09 BST 2026
+Hidden=20  DIV_WEIGHT=2
+==========================================
+Mon Jun 22 22:15:09 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    On  |   00000000:CA:00.0 Off |                    0 |
+| N/A   23C    P8             31W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+torch 2.5.1+cu121 | CUDA available: True
+>>> penalised_compare arch=static dw=2 hidden=20
+device=cuda mode=penalised_compare arch=static seeds=10 epochs=15 res=28 classes=10 hidden=20
+exp_penalised_schedule_compare [static, dw=2.0]: interleaved ...
+exp_penalised_schedule_compare [static, dw=2.0]: sequential (finetune) ...
+exp_penalised_schedule_compare [static, dw=2.0]: hybrid (warm-up + interleaved) ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/penalised_compare/penalised_compare_static_dw2p0.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/penalised_compare/penalised_acc_static_dw2p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/penalised_compare/penalised_rank_static_dw2p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/penalised_compare/penalised_grid_static_dw2p0.png
+
+  penalised schedule comparison (static, dw=2.0, final epoch):
+  schedule                                 acc  eff_rank
+  interleaved                            93.58      15.8
+  sequential (finetune)                  91.09      13.9
+  hybrid (warm-up+interleaved)           92.34      15.2
+
+done in 391.7s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/
+>>> penalised_compare arch=spiking dw=2 hidden=20
+device=cuda mode=penalised_compare arch=spiking seeds=10 epochs=15 res=28 classes=10 hidden=20
+exp_penalised_schedule_compare [spiking, dw=2.0]: interleaved ...
+exp_penalised_schedule_compare [spiking, dw=2.0]: sequential (finetune) ...
+exp_penalised_schedule_compare [spiking, dw=2.0]: hybrid (warm-up + interleaved) ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/penalised_compare/penalised_compare_spiking_dw2p0.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/penalised_compare/penalised_acc_spiking_dw2p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/penalised_compare/penalised_rank_spiking_dw2p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/penalised_compare/penalised_grid_spiking_dw2p0.png
+
+  penalised schedule comparison (spiking, dw=2.0, final epoch):
+  schedule                                 acc  eff_rank
+  interleaved                            93.41      16.6
+  sequential (finetune)                  92.00      15.9
+  hybrid (warm-up+interleaved)           92.52      16.2
+
+done in 1158.1s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/
+==========================================
+Penalised schedule comparison done — Mon 22 Jun 22:41:49 BST 2026
+Results in: /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h20/penalised_compare/
+==========================================

@@ -21,10 +21,10 @@ data/
 *.ckpt
 
 # ----- Experiment outputs -----
-experiments/
-experiments_h*/
-experiments_fashion_h*/
-logs/
+# experiments/
+# experiments_h*/
+# experiments_fashion_h*/
+# logs/
 
 # ----- Archives -----
 *.zip

@@ -1,0 +1,34 @@
+==========================================
+Job: fashion-extra-sweeps | ID: 17406289
+Node: node874.csf3.man.alces.network | Started: Thu  9 Jul 19:31:12 BST 2026
+mode=combined arch=static hidden=128 seeds=5 epochs=9 res=14
+output -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps
+
+device=cuda mode=combined arch=static seeds=5 epochs=9
+exp_combined_lambda_sweep [static]: lambda=0 ...
+exp_combined_lambda_sweep [static]: lambda=0.1 ...
+exp_combined_lambda_sweep [static]: lambda=0.5 ...
+exp_combined_lambda_sweep [static]: lambda=1 ...
+exp_combined_lambda_sweep [static]: lambda=2 ...
+exp_combined_lambda_sweep [static]: lambda=5 ...
+exp_combined_lambda_sweep [static]: lambda=10 ...
+exp_combined_lambda_sweep [static]: lambda=50 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_sweep_static.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_acc_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_rank_static.png
+
+  combined-loss lambda sweep (static, final epoch):
+     lam    acc%  recon_acc%    rank
+       0   84.05        0.00    33.1
+     0.1   84.03       44.59    33.0
+     0.5   84.00       44.98    32.6
+       1   84.01       45.45    32.3
+       2   84.02       46.23    31.7
+       5   83.81       48.08    30.1
+      10   83.65       50.02    28.1
+      50   82.38       55.51    18.4
+
+done in 326.0s.
+
+Finished: Thu  9 Jul 19:37:54 BST 2026
+==========================================

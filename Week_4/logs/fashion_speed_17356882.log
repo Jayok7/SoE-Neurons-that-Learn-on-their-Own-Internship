@@ -1,0 +1,109 @@
+==========================================
+Job: fashion-speed-cmp | ID: 17356882
+Node: node878.csf3.man.alces.network | Started: Thu  9 Jul 05:11:39 BST 2026
+
+DEVICE: cuda
+in_dim=784  train_batches=469  test_batches=79
+
+================================================================
+ARCH: nn   (hidden=128, epochs=15)
+================================================================
+  Epoch 01/15  loss=0.7608  acc=0.7625  top2=0.9038  val_loss=0.5094  val_acc=0.8201  val_top2=0.9376  recon_mse=0.0000  (0.8s) ? best
+  Epoch 02/15  loss=0.4447  acc=0.8433  top2=0.9498  val_loss=0.4403  val_acc=0.8422  val_top2=0.9473  recon_mse=0.0000  (0.7s) ? best
+  Epoch 03/15  loss=0.3980  acc=0.8591  top2=0.9567  val_loss=0.4170  val_acc=0.8501  val_top2=0.9511  recon_mse=0.0000  (0.7s) ? best
+  Epoch 04/15  loss=0.3706  acc=0.8666  top2=0.9608  val_loss=0.4014  val_acc=0.8579  val_top2=0.9537  recon_mse=0.0000  (0.7s) ? best
+  Epoch 05/15  loss=0.3534  acc=0.8738  top2=0.9634  val_loss=0.3929  val_acc=0.8616  val_top2=0.9545  recon_mse=0.0000  (0.7s) ? best
+  Epoch 06/15  loss=0.3388  acc=0.8778  top2=0.9659  val_loss=0.3773  val_acc=0.8649  val_top2=0.9582  recon_mse=0.0000  (0.7s) ? best
+  Epoch 07/15  loss=0.3261  acc=0.8826  top2=0.9673  val_loss=0.3701  val_acc=0.8669  val_top2=0.9576  recon_mse=0.0000  (0.7s) ? best
+  Epoch 08/15  loss=0.3167  acc=0.8850  top2=0.9693  val_loss=0.3642  val_acc=0.8679  val_top2=0.9594  recon_mse=0.0000  (0.7s) ? best
+  Epoch 09/15  loss=0.3059  acc=0.8892  top2=0.9707  val_loss=0.3581  val_acc=0.8702  val_top2=0.9613  recon_mse=0.0000  (0.7s) ? best
+  Epoch 10/15  loss=0.2975  acc=0.8926  top2=0.9723  val_loss=0.3558  val_acc=0.8714  val_top2=0.9608  recon_mse=0.0000  (0.7s) ? best
+  Epoch 11/15  loss=0.2895  acc=0.8954  top2=0.9730  val_loss=0.3484  val_acc=0.8751  val_top2=0.9624  recon_mse=0.0000  (0.7s) ? best
+  Epoch 12/15  loss=0.2820  acc=0.8982  top2=0.9744  val_loss=0.3428  val_acc=0.8784  val_top2=0.9621  recon_mse=0.0000  (0.7s) ? best
+  Epoch 13/15  loss=0.2741  acc=0.9011  top2=0.9745  val_loss=0.3393  val_acc=0.8775  val_top2=0.9643  recon_mse=0.0000  (0.7s)
+  Epoch 14/15  loss=0.2687  acc=0.9028  top2=0.9756  val_loss=0.3343  val_acc=0.8805  val_top2=0.9646  recon_mse=0.0000  (0.7s) ? best
+  Epoch 15/15  loss=0.2628  acc=0.9042  top2=0.9765  val_loss=0.3352  val_acc=0.8784  val_top2=0.9646  recon_mse=0.0000  (0.7s)
+  --> final val_acc=0.8784  val_top2=0.9646  macro_F1=0.8784  mean_epoch=0.72s
+  training curves saved -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/speed_compare/history_nn.png
+  prediction grid saved -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/speed_compare/predictions_nn.png
+
+================================================================
+ARCH: ann   (hidden=128, epochs=15)
+================================================================
+  Epoch 01/15  loss=0.7493  acc=0.7662  top2=0.9059  val_loss=0.5062  val_acc=0.8241  val_top2=0.9373  recon_mse=0.0445  (0.8s) ? best
+  Epoch 02/15  loss=0.4436  acc=0.8428  top2=0.9499  val_loss=0.4478  val_acc=0.8433  val_top2=0.9468  recon_mse=0.0288  (0.8s) ? best
+  Epoch 03/15  loss=0.3957  acc=0.8591  top2=0.9568  val_loss=0.4155  val_acc=0.8514  val_top2=0.9504  recon_mse=0.0247  (0.8s) ? best
+  Epoch 04/15  loss=0.3703  acc=0.8664  top2=0.9606  val_loss=0.4034  val_acc=0.8575  val_top2=0.9525  recon_mse=0.0229  (0.8s) ? best
+  Epoch 05/15  loss=0.3520  acc=0.8736  top2=0.9639  val_loss=0.3861  val_acc=0.8607  val_top2=0.9549  recon_mse=0.0218  (0.8s) ? best
+  Epoch 06/15  loss=0.3378  acc=0.8784  top2=0.9658  val_loss=0.3762  val_acc=0.8651  val_top2=0.9586  recon_mse=0.0211  (0.8s) ? best
+  Epoch 07/15  loss=0.3257  acc=0.8823  top2=0.9685  val_loss=0.3720  val_acc=0.8668  val_top2=0.9589  recon_mse=0.0205  (0.8s) ? best
+  Epoch 08/15  loss=0.3145  acc=0.8866  top2=0.9691  val_loss=0.3570  val_acc=0.8718  val_top2=0.9609  recon_mse=0.0200  (0.8s) ? best
+  Epoch 09/15  loss=0.3040  acc=0.8900  top2=0.9710  val_loss=0.3506  val_acc=0.8740  val_top2=0.9619  recon_mse=0.0196  (0.8s) ? best
+  Epoch 10/15  loss=0.2969  acc=0.8929  top2=0.9727  val_loss=0.3600  val_acc=0.8686  val_top2=0.9612  recon_mse=0.0193  (0.8s)
+  Epoch 11/15  loss=0.2873  acc=0.8963  top2=0.9733  val_loss=0.3425  val_acc=0.8771  val_top2=0.9629  recon_mse=0.0190  (0.8s) ? best
+  Epoch 12/15  loss=0.2804  acc=0.8987  top2=0.9743  val_loss=0.3466  val_acc=0.8764  val_top2=0.9609  recon_mse=0.0188  (0.8s)
+  Epoch 13/15  loss=0.2738  acc=0.9013  top2=0.9754  val_loss=0.3382  val_acc=0.8794  val_top2=0.9637  recon_mse=0.0186  (0.8s) ? best
+  Epoch 14/15  loss=0.2673  acc=0.9036  top2=0.9764  val_loss=0.3386  val_acc=0.8764  val_top2=0.9630  recon_mse=0.0185  (0.8s)
+  Epoch 15/15  loss=0.2618  acc=0.9048  top2=0.9772  val_loss=0.3360  val_acc=0.8787  val_top2=0.9646  recon_mse=0.0184  (0.8s)
+  --> final val_acc=0.8787  val_top2=0.9646  macro_F1=0.8786  mean_epoch=0.81s
+  training curves saved -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/speed_compare/history_ann.png
+  prediction grid saved -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/speed_compare/predictions_ann.png
+
+================================================================
+ARCH: static   (hidden=128, epochs=15)
+================================================================
+  Epoch 01/15  loss=0.7494  acc=0.7642  top2=0.9054  val_loss=0.5306  val_acc=0.8045  val_top2=0.9336  recon_mse=0.1189  (0.9s) ? best
+  Epoch 02/15  loss=0.4481  acc=0.8416  top2=0.9488  val_loss=0.4455  val_acc=0.8413  val_top2=0.9466  recon_mse=0.0830  (0.9s) ? best
+  Epoch 03/15  loss=0.3996  acc=0.8583  top2=0.9567  val_loss=0.4186  val_acc=0.8506  val_top2=0.9507  recon_mse=0.0792  (0.9s) ? best
+  Epoch 04/15  loss=0.3727  acc=0.8671  top2=0.9610  val_loss=0.4023  val_acc=0.8578  val_top2=0.9518  recon_mse=0.0781  (0.9s) ? best
+  Epoch 05/15  loss=0.3529  acc=0.8726  top2=0.9630  val_loss=0.3852  val_acc=0.8594  val_top2=0.9573  recon_mse=0.0777  (0.9s) ? best
+  Epoch 06/15  loss=0.3387  acc=0.8778  top2=0.9655  val_loss=0.3765  val_acc=0.8655  val_top2=0.9559  recon_mse=0.0776  (0.9s) ? best
+  Epoch 07/15  loss=0.3267  acc=0.8820  top2=0.9680  val_loss=0.3762  val_acc=0.8647  val_top2=0.9556  recon_mse=0.0776  (0.9s)
+  Epoch 08/15  loss=0.3148  acc=0.8865  top2=0.9688  val_loss=0.3595  val_acc=0.8721  val_top2=0.9584  recon_mse=0.0776  (0.9s) ? best
+  Epoch 09/15  loss=0.3044  acc=0.8897  top2=0.9709  val_loss=0.3591  val_acc=0.8682  val_top2=0.9610  recon_mse=0.0775  (0.9s)
+  Epoch 10/15  loss=0.2957  acc=0.8927  top2=0.9721  val_loss=0.3465  val_acc=0.8743  val_top2=0.9607  recon_mse=0.0775  (0.9s) ? best
+  Epoch 11/15  loss=0.2892  acc=0.8948  top2=0.9725  val_loss=0.3437  val_acc=0.8751  val_top2=0.9618  recon_mse=0.0775  (0.9s) ? best
+  Epoch 12/15  loss=0.2805  acc=0.8985  top2=0.9745  val_loss=0.3403  val_acc=0.8778  val_top2=0.9626  recon_mse=0.0775  (0.9s) ? best
+  Epoch 13/15  loss=0.2748  acc=0.9004  top2=0.9749  val_loss=0.3349  val_acc=0.8798  val_top2=0.9640  recon_mse=0.0775  (0.9s) ? best
+  Epoch 14/15  loss=0.2670  acc=0.9016  top2=0.9763  val_loss=0.3293  val_acc=0.8792  val_top2=0.9652  recon_mse=0.0776  (0.9s)
+  Epoch 15/15  loss=0.2606  acc=0.9057  top2=0.9771  val_loss=0.3311  val_acc=0.8820  val_top2=0.9644  recon_mse=0.0775  (0.9s) ? best
+  --> final val_acc=0.8820  val_top2=0.9644  macro_F1=0.8807  mean_epoch=0.93s
+  training curves saved -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/speed_compare/history_static.png
+  prediction grid saved -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/speed_compare/predictions_static.png
+
+================================================================
+ARCH: spiking   (hidden=128, epochs=15)
+================================================================
+  Epoch 01/15  loss=0.6301  acc=0.7943  top2=0.9250  val_loss=0.4686  val_acc=0.8363  val_top2=0.9420  recon_mse=0.1172  (5.9s) ? best
+  Epoch 02/15  loss=0.4114  acc=0.8539  top2=0.9553  val_loss=0.4220  val_acc=0.8484  val_top2=0.9505  recon_mse=0.0819  (4.0s) ? best
+  Epoch 03/15  loss=0.3750  acc=0.8653  top2=0.9596  val_loss=0.4035  val_acc=0.8573  val_top2=0.9549  recon_mse=0.0792  (4.0s) ? best
+  Epoch 04/15  loss=0.3533  acc=0.8727  top2=0.9623  val_loss=0.3937  val_acc=0.8588  val_top2=0.9538  recon_mse=0.0787  (4.0s) ? best
+  Epoch 05/15  loss=0.3347  acc=0.8791  top2=0.9656  val_loss=0.3749  val_acc=0.8613  val_top2=0.9568  recon_mse=0.0785  (4.0s) ? best
+  Epoch 06/15  loss=0.3233  acc=0.8831  top2=0.9678  val_loss=0.3688  val_acc=0.8674  val_top2=0.9595  recon_mse=0.0786  (4.0s) ? best
+  Epoch 07/15  loss=0.3145  acc=0.8850  top2=0.9688  val_loss=0.3652  val_acc=0.8671  val_top2=0.9608  recon_mse=0.0788  (4.0s)
+  Epoch 08/15  loss=0.3070  acc=0.8885  top2=0.9701  val_loss=0.3582  val_acc=0.8671  val_top2=0.9613  recon_mse=0.0791  (4.0s)
+  Epoch 09/15  loss=0.3012  acc=0.8897  top2=0.9708  val_loss=0.3532  val_acc=0.8736  val_top2=0.9610  recon_mse=0.0792  (4.0s) ? best
+  Epoch 10/15  loss=0.2928  acc=0.8944  top2=0.9720  val_loss=0.3584  val_acc=0.8710  val_top2=0.9637  recon_mse=0.0793  (4.0s)
+  Epoch 11/15  loss=0.2868  acc=0.8949  top2=0.9728  val_loss=0.3569  val_acc=0.8712  val_top2=0.9605  recon_mse=0.0793  (4.0s)
+  Epoch 12/15  loss=0.2824  acc=0.8965  top2=0.9725  val_loss=0.3410  val_acc=0.8769  val_top2=0.9630  recon_mse=0.0793  (4.0s) ? best
+  Epoch 13/15  loss=0.2770  acc=0.8998  top2=0.9739  val_loss=0.3478  val_acc=0.8753  val_top2=0.9637  recon_mse=0.0794  (4.0s)
+  Epoch 14/15  loss=0.2709  acc=0.9010  top2=0.9753  val_loss=0.3427  val_acc=0.8762  val_top2=0.9636  recon_mse=0.0794  (4.0s)
+  Epoch 15/15  loss=0.2665  acc=0.9036  top2=0.9750  val_loss=0.3421  val_acc=0.8764  val_top2=0.9641  recon_mse=0.0793  (4.0s)
+  --> final val_acc=0.8764  val_top2=0.9641  macro_F1=0.8768  mean_epoch=4.14s
+  training curves saved -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/speed_compare/history_spiking.png
+  prediction grid saved -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/speed_compare/predictions_spiking.png
+speed summary saved -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/speed_compare/ann_vs_nan_speed.png
+
+================================================================
+SUMMARY  (mean epoch time | final val_acc | top2 | macro-F1)
+================================================================
+  nn          0.72s   acc=0.8784  top2=0.9646  F1=0.8784
+  ann         0.81s   acc=0.8787  top2=0.9646  F1=0.8786
+  static      0.93s   acc=0.8820  top2=0.9644  F1=0.8807
+  spiking     4.14s   acc=0.8764  top2=0.9641  F1=0.8768
+  nn is 0.89x the per-epoch cost of ann
+  static is 1.15x the per-epoch cost of ann
+  spiking is 5.11x the per-epoch cost of ann
+
+Finished: Thu  9 Jul 05:13:43 BST 2026
+==========================================

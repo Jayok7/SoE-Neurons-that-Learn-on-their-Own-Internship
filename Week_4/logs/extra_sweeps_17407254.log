@@ -1,0 +1,40 @@
+==========================================
+Job: fashion-extra-sweeps | ID: 17407254
+Node: node874.csf3.man.alces.network | Started: Thu  9 Jul 20:17:36 BST 2026
+mode=combined arch=static hidden=128 optim=adam lr=0.001 seeds=5 epochs=9 res=14
+output -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps
+
+device=cuda mode=combined arch=static optim=adam lr=0.001 seeds=5 epochs=9
+exp_combined_lambda_sweep [static]: lambda=0 ...
+exp_combined_lambda_sweep [static]: lambda=0.5 ...
+exp_combined_lambda_sweep [static]: lambda=1 ...
+exp_combined_lambda_sweep [static]: lambda=2 ...
+exp_combined_lambda_sweep [static]: lambda=5 ...
+exp_combined_lambda_sweep [static]: lambda=13 ...
+exp_combined_lambda_sweep [static]: lambda=20 ...
+exp_combined_lambda_sweep [static]: lambda=50 ...
+exp_combined_lambda_sweep [static]: lambda=100 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_recon_mse_curves_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_acc_curves_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_curves_static.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_sweep_static.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_recon_mse_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_acc_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/combined_sweep/combined_rank_static.png
+
+  combined-loss lambda sweep (static, final epoch):
+     lam    acc%  recon_mse  recon_acc%    rank
+       0   84.05     0.1829        0.00    33.1
+     0.5   84.00     0.0544       44.98    32.6
+       1   84.01     0.0540       45.45    32.3
+       2   84.02     0.0532       46.23    31.7
+       5   83.81     0.0514       48.08    30.1
+      13   83.51     0.0486       50.85    26.9
+      20   83.18     0.0471       52.38    24.6
+      50   82.38     0.0440       55.51    18.4
+     100   81.61     0.0423       57.22    13.2
+
+done in 311.4s.
+
+Finished: Thu  9 Jul 20:22:51 BST 2026
+==========================================

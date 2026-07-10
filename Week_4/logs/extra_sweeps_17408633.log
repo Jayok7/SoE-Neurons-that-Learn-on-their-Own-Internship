@@ -1,0 +1,57 @@
+==========================================
+Job: fashion-extra-sweeps | ID: 17408633
+Node: node870.csf3.man.alces.network | Started: Thu  9 Jul 20:56:05 BST 2026
+mode=penalty_recon arch=static hidden=128 optim=adam lr=0.001 seeds=5 epochs=9 res=14
+output -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps
+
+device=cuda mode=penalty_recon arch=static optim=adam lr=0.001 seeds=5 epochs=9
+exp_penalty_recon_sweep [static/decoder]: div_weight=0 ...
+exp_penalty_recon_sweep [static/decoder]: div_weight=0.1 ...
+exp_penalty_recon_sweep [static/decoder]: div_weight=0.5 ...
+exp_penalty_recon_sweep [static/decoder]: div_weight=1 ...
+exp_penalty_recon_sweep [static/decoder]: div_weight=2 ...
+exp_penalty_recon_sweep [static/decoder]: div_weight=5 ...
+exp_penalty_recon_sweep [static/decoder]: div_weight=10 ...
+exp_penalty_recon_sweep [static/decoder]: div_weight=20 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/recon_mse_curves_static_decoder.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/acc_curves_static_decoder.png
+exp_penalty_recon_sweep [static/activation]: div_weight=0 ...
+exp_penalty_recon_sweep [static/activation]: div_weight=0.1 ...
+exp_penalty_recon_sweep [static/activation]: div_weight=0.5 ...
+exp_penalty_recon_sweep [static/activation]: div_weight=1 ...
+exp_penalty_recon_sweep [static/activation]: div_weight=2 ...
+exp_penalty_recon_sweep [static/activation]: div_weight=5 ...
+exp_penalty_recon_sweep [static/activation]: div_weight=10 ...
+exp_penalty_recon_sweep [static/activation]: div_weight=20 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/recon_mse_curves_static_activation.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/acc_curves_static_activation.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/penalty_recon_curves_static.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/penalty_recon_sweep_static.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/recon_vs_penalty_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/recon_mse_vs_penalty_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/acc_vs_penalty_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h128/extra_sweeps/penalty_recon_sweep/rank_vs_penalty_static.png
+
+  penalty vs reconstruction (static, final epoch):
+      dw penalty      recon_mse  recon_acc%    acc%    rank
+       0 decoder         0.0546       44.83   82.83    29.9
+     0.1 decoder         0.0619       37.43   82.91    30.2
+     0.5 decoder         0.0634       35.92   82.94    30.3
+       1 decoder         0.0636       35.72   82.93    30.3
+       2 decoder         0.0637       35.62   82.92    30.3
+       5 decoder         0.0638       35.55   82.92    30.3
+      10 decoder         0.0638       35.52   82.92    30.3
+      20 decoder         0.0638       35.50   82.92    30.3
+       0 activation      0.0546       44.83   82.83    29.9
+     0.1 activation      0.0565       42.94   82.74    31.4
+     0.5 activation      0.0587       40.70   82.67    35.9
+       1 activation      0.0600       39.33   82.32    38.0
+       2 activation      0.0613       38.03   81.74    38.0
+       5 activation      0.0626       36.73   80.33    35.0
+      10 activation      0.0631       36.18   78.73    34.0
+      20 activation      0.0634       35.90   76.24    33.0
+
+done in 665.3s.
+
+Finished: Thu  9 Jul 21:07:56 BST 2026
+==========================================

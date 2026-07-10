@@ -1,0 +1,44 @@
+==========================================
+Job: nan-pen-cmp | ID: 16390714
+Node: node886.csf3.man.alces.network | Started: Mon 22 Jun 21:55:14 BST 2026
+Hidden=128  DIV_WEIGHT=2
+==========================================
+Mon Jun 22 21:55:14 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    On  |   00000000:E1:00.0 Off |                    0 |
+| N/A   27C    P8             32W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+torch 2.5.1+cu121 | CUDA available: True
+>>> penalised_compare arch=static dw=2 hidden=128
+device=cuda mode=penalised_compare arch=static seeds=10 epochs=15 res=28 classes=10 hidden=128
+exp_penalised_schedule_compare [static, dw=2.0]: interleaved ...
+exp_penalised_schedule_compare [static, dw=2.0]: sequential (finetune) ...
+exp_penalised_schedule_compare [static, dw=2.0]: hybrid (warm-up + interleaved) ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h128/penalised_compare/penalised_compare_static_dw2p0.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h128/penalised_compare/penalised_acc_static_dw2p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h128/penalised_compare/penalised_rank_static_dw2p0.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h128/penalised_compare/penalised_grid_static_dw2p0.png
+
+  penalised schedule comparison (static, dw=2.0, final epoch):
+  schedule                                 acc  eff_rank
+  interleaved                            96.70      63.7
+  sequential (finetune)                  92.82      38.0
+  hybrid (warm-up+interleaved)           95.38      57.2
+
+done in 402.1s. Outputs in .//mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_h128/
+>>> penalised_compare arch=spiking dw=2 hidden=128

@@ -1,0 +1,30 @@
+==========================================
+Job: fashion-extra-sweeps | ID: 17365887
+Node: node888.csf3.man.alces.network | Started: Thu  9 Jul 07:47:44 BST 2026
+mode=ae_prob arch=static hidden=20 seeds=5 epochs=9 res=14
+output -> /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/extra_sweeps
+
+device=cuda mode=ae_prob arch=static seeds=5 epochs=9
+exp_ae_prob_sweep [static]: ae_prob=0.0 ...
+exp_ae_prob_sweep [static]: ae_prob=0.1 ...
+exp_ae_prob_sweep [static]: ae_prob=0.3 ...
+exp_ae_prob_sweep [static]: ae_prob=0.5 ...
+exp_ae_prob_sweep [static]: ae_prob=0.7 ...
+exp_ae_prob_sweep [static]: ae_prob=0.9 ...
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/extra_sweeps/ae_prob_sweep/ae_prob_sweep_static.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/extra_sweeps/ae_prob_sweep/ae_prob_acc_static.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/extra_sweeps/ae_prob_sweep/ae_prob_rank_static.png
+
+  AE-probability sweep (static, final epoch):
+      p    acc%  recon_acc%    rank
+    0.0   81.88        0.00    12.4
+    0.1   81.52       33.49    12.3
+    0.3   80.90       43.96    12.0
+    0.5   79.87       44.99    11.7
+    0.7   77.64       45.35    11.3
+    0.9   71.02       46.77    10.5
+
+done in 176.7s.
+
+Finished: Thu  9 Jul 07:50:46 BST 2026
+==========================================

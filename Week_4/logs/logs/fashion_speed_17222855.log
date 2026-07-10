@@ -1,0 +1,13 @@
+Collecting scikit-learn
+  Using cached scikit_learn-1.7.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (11 kB)
+Requirement already satisfied: numpy>=1.22.0 in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/.conda/envs/torch_gpu/lib/python3.10/site-packages (from scikit-learn) (1.26.4)
+Requirement already satisfied: scipy>=1.8.0 in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/.conda/envs/torch_gpu/lib/python3.10/site-packages (from scikit-learn) (1.15.3)
+Requirement already satisfied: joblib>=1.2.0 in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/.conda/envs/torch_gpu/lib/python3.10/site-packages (from scikit-learn) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/.conda/envs/torch_gpu/lib/python3.10/site-packages (from scikit-learn) (3.6.0)
+Using cached scikit_learn-1.7.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.7 MB)
+Installing collected packages: scikit-learn
+Successfully installed scikit-learn-1.7.2
+==========================================
+Job: fashion-speed-cmp | ID: 17222855
+Node: node868.csf3.man.alces.network | Started: Wed  8 Jul 04:53:24 BST 2026
+
