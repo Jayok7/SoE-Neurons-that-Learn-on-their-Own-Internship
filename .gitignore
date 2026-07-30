@@ -40,3 +40,7 @@ Thumbs.db
 
 # ----- Backup files -----
 *.bak
+
+*.zip
+*.log
+*.err
