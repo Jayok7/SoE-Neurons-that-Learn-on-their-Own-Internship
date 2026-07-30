@@ -94,8 +94,11 @@ def penalty_decoder(layer, x=None):
 
 
 def penalty_activation(layer, x):
-    """Barlow-Twins style: decorrelate the ACTIVATIONS over a batch.
-    Acts on the representation (what neurons actually output). Needs the input x."""
+    """
+    based on Barlow-Twins redundancy reduction: decorrelate the ACTIVATIONS over a 
+    batch. Acts on the representation (what neurons actually output). Needs 
+    the input x.
+    """
     activations = layer(x)                                    # (batch, neurons)
     activations = ((activations - activations.mean(0, keepdim=True))
                    / (activations.std(0, keepdim=True) + 1e-8))

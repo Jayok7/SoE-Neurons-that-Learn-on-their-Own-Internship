@@ -1,0 +1,129 @@
+==========================================
+Job: fashion-simple | ID: 17675904
+Node: node885.csf3.man.alces.network | Started: Sat 18 Jul 00:04:11 BST 2026
+mode=both variants=linear frozen mlp nan ann hidden=20 res=28 act=sigmoid
+seeds=5 epochs=15 batch=128 lr=0.001 ae_prob=0.5 lam=2
+
+device=cuda variants=['linear', 'frozen', 'mlp', 'nan', 'ann'] seeds=5 epochs=15 batch=128 lr=0.001 res=28 hidden=20 act=sigmoid ae_prob=0.5 | train=60000 test=10000
+
+[linear]
+  seed 0: acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+  seed 1: acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+  seed 2: acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+  seed 3: acc=84.39 top2=94.72 ce=0.4431 recon=n/a
+  seed 4: acc=84.27 top2=94.80 ce=0.4445 recon=n/a
+
+[frozen]
+  seed 0: acc=60.85 top2=78.81 ce=1.8007 recon=n/a
+  seed 1: acc=56.09 top2=74.48 ce=1.8042 recon=n/a
+  seed 2: acc=58.41 top2=76.40 ce=1.8614 recon=n/a
+  seed 3: acc=55.61 top2=75.62 ce=1.8325 recon=n/a
+  seed 4: acc=55.93 top2=75.53 ce=1.8581 recon=n/a
+
+[mlp]
+  seed 0: acc=85.99 top2=95.48 ce=0.3942 recon=n/a
+  seed 1: acc=86.15 top2=95.54 ce=0.3939 recon=n/a
+  seed 2: acc=85.84 top2=95.34 ce=0.3980 recon=n/a
+  seed 3: acc=86.02 top2=95.49 ce=0.3913 recon=n/a
+  seed 4: acc=86.27 top2=95.68 ce=0.3897 recon=n/a
+
+[nan]
+  seed 0: acc=84.83 top2=94.91 ce=0.4278 recon=0.0775
+  seed 1: acc=84.85 top2=95.10 ce=0.4214 recon=0.0782
+  seed 2: acc=85.13 top2=95.08 ce=0.4193 recon=0.0779
+  seed 3: acc=84.84 top2=95.01 ce=0.4281 recon=0.0784
+  seed 4: acc=85.01 top2=94.93 ce=0.4249 recon=0.0773
+
+[ann]
+  seed 0: acc=84.64 top2=95.08 ce=0.4264 recon=0.0380
+  seed 1: acc=85.22 top2=94.97 ce=0.4244 recon=0.0376
+  seed 2: acc=85.21 top2=95.03 ce=0.4187 recon=0.0376
+  seed 3: acc=84.92 top2=95.22 ce=0.4203 recon=0.0363
+  seed 4: acc=84.87 top2=94.89 ce=0.4271 recon=0.0388
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/results_interleaved.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/acc_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/top2_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/ce_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/recon_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/cls_grid_linear.png
+  [reconstruction_grid] skipped — LinearClassifier has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/cls_grid_frozen.png
+  [reconstruction_grid] skipped — MLP has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/cls_grid_mlp.png
+  [reconstruction_grid] skipped — MLP has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/cls_grid_nan.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/recon_grid_nan.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/cls_grid_ann.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/recon_grid_ann.png
+
+  variant        acc%    top2%       CE     recon
+  linear        84.43    94.73   0.4423       n/a
+  frozen        57.38    76.17   1.8314       n/a
+  mlp           86.05    95.51   0.3934       n/a
+  nan           84.93    95.01   0.4243    0.0778
+  ann           84.97    95.04   0.4234    0.0376
+
+done in 227.6s. Outputs in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/
+device=cuda variants=['linear', 'frozen', 'mlp', 'nan', 'ann'] lam=2.0 seeds=5 epochs=15 batch=128 lr=0.001 res=28 hidden=20 act=sigmoid | train=60000 test=10000
+
+[linear]
+  seed 0: acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+  seed 1: acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+  seed 2: acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+  seed 3: acc=84.39 top2=94.72 ce=0.4431 recon=n/a
+  seed 4: acc=84.27 top2=94.80 ce=0.4445 recon=n/a
+
+[frozen]
+  seed 0: acc=60.85 top2=78.81 ce=1.8007 recon=n/a
+  seed 1: acc=56.09 top2=74.48 ce=1.8042 recon=n/a
+  seed 2: acc=58.41 top2=76.40 ce=1.8614 recon=n/a
+  seed 3: acc=55.61 top2=75.62 ce=1.8325 recon=n/a
+  seed 4: acc=55.93 top2=75.53 ce=1.8581 recon=n/a
+
+[mlp]
+  seed 0: acc=85.99 top2=95.48 ce=0.3942 recon=n/a
+  seed 1: acc=86.15 top2=95.54 ce=0.3939 recon=n/a
+  seed 2: acc=85.84 top2=95.34 ce=0.3980 recon=n/a
+  seed 3: acc=86.02 top2=95.49 ce=0.3913 recon=n/a
+  seed 4: acc=86.27 top2=95.68 ce=0.3897 recon=n/a
+
+[nan]
+  seed 0: acc=85.96 top2=95.48 ce=0.3977 recon=0.0768
+  seed 1: acc=86.08 top2=95.61 ce=0.3912 recon=0.0775
+  seed 2: acc=85.88 top2=95.43 ce=0.3928 recon=0.0773
+  seed 3: acc=85.98 top2=95.72 ce=0.3899 recon=0.0778
+  seed 4: acc=85.82 top2=95.62 ce=0.3950 recon=0.0769
+
+[ann]
+  seed 0: acc=85.41 top2=95.36 ce=0.4025 recon=0.0306
+  seed 1: acc=86.09 top2=95.54 ce=0.3930 recon=0.0294
+  seed 2: acc=85.88 top2=95.38 ce=0.3941 recon=0.0299
+  seed 3: acc=85.61 top2=95.41 ce=0.3968 recon=0.0296
+  seed 4: acc=85.71 top2=95.57 ce=0.3947 recon=0.0309
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/results_combined.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/acc_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/top2_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/ce_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/recon_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/cls_grid_linear.png
+  [reconstruction_grid] skipped — LinearClassifier has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/cls_grid_frozen.png
+  [reconstruction_grid] skipped — MLP has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/cls_grid_mlp.png
+  [reconstruction_grid] skipped — MLP has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/cls_grid_nan.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/recon_grid_nan.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/cls_grid_ann.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/recon_grid_ann.png
+
+  variant        acc%    top2%       CE     recon
+  linear        84.43    94.73   0.4423       n/a
+  frozen        57.38    76.17   1.8314       n/a
+  mlp           86.05    95.51   0.3934       n/a
+  nan           85.94    95.57   0.3933    0.0773
+  ann           85.74    95.45   0.3962    0.0301
+
+done in 245.0s. Outputs in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/
+
+Finished: Sat 18 Jul 00:12:10 BST 2026
+==========================================

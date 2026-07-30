@@ -1,0 +1,394 @@
+==========================================
+Job: fashion-week7 | ID: 17891599
+Node: node879.csf3.man.alces.network | Started: Sat 25 Jul 15:49:56 BST 2026
+mode=sweep variants=default res=28 act=sigmoid
+seeds=3 epochs=15 batch=128 lr=0.001 ae_prob=0.5
+sweep widths=[2 4 8 16 32 64 128 256 512] | collapse hidden=128
+
+device=cuda widths=[2, 4, 8, 16, 32, 64, 128, 256, 512] variants=['linear', 'frozen', 'mlp', 'nan', 'ann'] seeds=3 epochs=15 batch=128 lr=0.001 res=28 act=sigmoid ae_prob=0.5
+train=60000 test=10000 | 135 runs total
+
+==================================================================
+hidden width = 2
+==================================================================
+  [1/135] linear      w=2    seed=0 acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+        collapse: no hidden layer
+  [2/135] linear      w=2    seed=1 acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+        collapse: no hidden layer
+  [3/135] linear      w=2    seed=2 acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+        collapse: no hidden layer
+  [4/135] frozen      w=2    seed=0 acc=22.30 top2=40.17 ce=2.2689 recon=n/a
+        collapse: eff_rank=2.0/2 (100%)  PR90=2  |corr|=0.024  dead=0%  collapse=0.000
+  [5/135] frozen      w=2    seed=1 acc=27.88 top2=45.28 ce=2.2599 recon=n/a
+        collapse: eff_rank=2.0/2 (100%)  PR90=2  |corr|=0.039  dead=0%  collapse=0.000
+  [6/135] frozen      w=2    seed=2 acc=22.29 top2=39.88 ce=2.2552 recon=n/a
+        collapse: eff_rank=1.9/2 (97%)  PR90=2  |corr|=0.431  dead=0%  collapse=0.029
+  [7/135] mlp         w=2    seed=0 acc=46.93 top2=71.62 ce=1.2075 recon=n/a
+        collapse: eff_rank=2.0/2 (100%)  PR90=2  |corr|=0.036  dead=0%  collapse=0.000
+  [8/135] mlp         w=2    seed=1 acc=47.35 top2=72.97 ce=1.3162 recon=n/a
+        collapse: eff_rank=1.9/2 (96%)  PR90=2  |corr|=0.533  dead=0%  collapse=0.041
+  [9/135] mlp         w=2    seed=2 acc=49.25 top2=77.01 ce=1.2349 recon=n/a
+        collapse: eff_rank=2.0/2 (99%)  PR90=2  |corr|=0.264  dead=0%  collapse=0.015
+  [10/135] nan         w=2    seed=0 acc=40.22 top2=74.66 ce=1.3036 recon=0.0731
+        collapse: eff_rank=2.0/2 (100%)  PR90=2  |corr|=0.188  dead=0%  collapse=0.005  |cos_dec|=0.341
+  [11/135] nan         w=2    seed=1 acc=40.55 top2=61.71 ce=1.5229 recon=0.0727
+        collapse: eff_rank=1.9/2 (94%)  PR90=2  |corr|=0.625  dead=0%  collapse=0.061  |cos_dec|=0.914
+  [12/135] nan         w=2    seed=2 acc=41.84 top2=70.47 ce=1.3691 recon=0.0759
+        collapse: eff_rank=2.0/2 (98%)  PR90=2  |corr|=0.377  dead=0%  collapse=0.019  |cos_dec|=0.945
+  [13/135] ann         w=2    seed=0 acc=39.05 top2=59.35 ce=1.3718 recon=0.0665
+        collapse: eff_rank=1.9/2 (94%)  PR90=2  |corr|=0.605  dead=0%  collapse=0.056
+  [14/135] ann         w=2    seed=1 acc=39.29 top2=66.58 ce=1.3950 recon=0.0717
+        collapse: eff_rank=1.9/2 (97%)  PR90=2  |corr|=0.444  dead=0%  collapse=0.027
+  [15/135] ann         w=2    seed=2 acc=43.37 top2=75.85 ce=1.2789 recon=0.0604
+        collapse: eff_rank=2.0/2 (99%)  PR90=2  |corr|=0.200  dead=0%  collapse=0.006
+
+==================================================================
+hidden width = 4
+==================================================================
+  [16/135] linear      w=4    seed=0 acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+        collapse: no hidden layer
+  [17/135] linear      w=4    seed=1 acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+        collapse: no hidden layer
+  [18/135] linear      w=4    seed=2 acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+        collapse: no hidden layer
+  [19/135] frozen      w=4    seed=0 acc=32.50 top2=54.86 ce=2.2327 recon=n/a
+        collapse: eff_rank=3.9/4 (98%)  PR90=4  |corr|=0.230  dead=0%  collapse=0.024
+  [20/135] frozen      w=4    seed=1 acc=40.19 top2=56.16 ce=2.1249 recon=n/a
+        collapse: eff_rank=3.7/4 (92%)  PR90=3  |corr|=0.177  dead=0%  collapse=0.084
+  [21/135] frozen      w=4    seed=2 acc=33.53 top2=57.34 ce=2.1936 recon=n/a
+        collapse: eff_rank=3.8/4 (96%)  PR90=4  |corr|=0.251  dead=0%  collapse=0.041
+  [22/135] mlp         w=4    seed=0 acc=78.94 top2=91.31 ce=0.6239 recon=n/a
+        collapse: eff_rank=3.9/4 (97%)  PR90=4  |corr|=0.178  dead=0%  collapse=0.029
+  [23/135] mlp         w=4    seed=1 acc=76.34 top2=89.19 ce=0.7182 recon=n/a
+        collapse: eff_rank=3.8/4 (96%)  PR90=3  |corr|=0.226  dead=0%  collapse=0.043
+  [24/135] mlp         w=4    seed=2 acc=73.64 top2=88.30 ce=0.7032 recon=n/a
+        collapse: eff_rank=3.9/4 (98%)  PR90=4  |corr|=0.217  dead=0%  collapse=0.020
+  [25/135] nan         w=4    seed=0 acc=75.80 top2=88.50 ce=0.8214 recon=0.0780
+        collapse: eff_rank=3.9/4 (96%)  PR90=3  |corr|=0.180  dead=0%  collapse=0.037  |cos_dec|=0.376
+  [26/135] nan         w=4    seed=1 acc=71.97 top2=88.89 ce=0.8288 recon=0.0771
+        collapse: eff_rank=3.8/4 (95%)  PR90=3  |corr|=0.299  dead=0%  collapse=0.051  |cos_dec|=0.436
+  [27/135] nan         w=4    seed=2 acc=70.41 top2=89.29 ce=0.8717 recon=0.0771
+        collapse: eff_rank=3.8/4 (95%)  PR90=3  |corr|=0.215  dead=0%  collapse=0.049  |cos_dec|=0.446
+  [28/135] ann         w=4    seed=0 acc=72.06 top2=88.38 ce=0.8174 recon=0.0592
+        collapse: eff_rank=3.8/4 (96%)  PR90=3  |corr|=0.234  dead=0%  collapse=0.039
+  [29/135] ann         w=4    seed=1 acc=59.28 top2=81.87 ce=0.9452 recon=0.0576
+        collapse: eff_rank=3.6/4 (90%)  PR90=3  |corr|=0.340  dead=0%  collapse=0.098
+  [30/135] ann         w=4    seed=2 acc=71.23 top2=90.83 ce=0.8384 recon=0.0583
+        collapse: eff_rank=3.8/4 (94%)  PR90=3  |corr|=0.226  dead=0%  collapse=0.061
+
+==================================================================
+hidden width = 8
+==================================================================
+  [31/135] linear      w=8    seed=0 acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+        collapse: no hidden layer
+  [32/135] linear      w=8    seed=1 acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+        collapse: no hidden layer
+  [33/135] linear      w=8    seed=2 acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+        collapse: no hidden layer
+  [34/135] frozen      w=8    seed=0 acc=50.24 top2=73.21 ce=2.0490 recon=n/a
+        collapse: eff_rank=7.3/8 (92%)  PR90=6  |corr|=0.233  dead=0%  collapse=0.083
+  [35/135] frozen      w=8    seed=1 acc=47.14 top2=65.50 ce=1.9813 recon=n/a
+        collapse: eff_rank=6.8/8 (85%)  PR90=5  |corr|=0.298  dead=0%  collapse=0.154
+  [36/135] frozen      w=8    seed=2 acc=48.80 top2=68.82 ce=2.1252 recon=n/a
+        collapse: eff_rank=7.4/8 (92%)  PR90=6  |corr|=0.268  dead=0%  collapse=0.079
+  [37/135] mlp         w=8    seed=0 acc=83.86 top2=94.11 ce=0.4724 recon=n/a
+        collapse: eff_rank=7.3/8 (91%)  PR90=6  |corr|=0.242  dead=0%  collapse=0.093
+  [38/135] mlp         w=8    seed=1 acc=83.90 top2=94.02 ce=0.4759 recon=n/a
+        collapse: eff_rank=6.9/8 (86%)  PR90=5  |corr|=0.352  dead=0%  collapse=0.139
+  [39/135] mlp         w=8    seed=2 acc=83.95 top2=94.29 ce=0.4659 recon=n/a
+        collapse: eff_rank=7.3/8 (91%)  PR90=6  |corr|=0.255  dead=0%  collapse=0.089
+  [40/135] nan         w=8    seed=0 acc=81.63 top2=93.44 ce=0.5466 recon=0.0780
+        collapse: eff_rank=7.2/8 (90%)  PR90=5  |corr|=0.253  dead=0%  collapse=0.103  |cos_dec|=0.462
+  [41/135] nan         w=8    seed=1 acc=81.91 top2=92.97 ce=0.5495 recon=0.0775
+        collapse: eff_rank=6.5/8 (81%)  PR90=4  |corr|=0.310  dead=0%  collapse=0.191  |cos_dec|=0.481
+  [42/135] nan         w=8    seed=2 acc=82.85 top2=93.73 ce=0.5215 recon=0.0769
+        collapse: eff_rank=6.8/8 (85%)  PR90=5  |corr|=0.302  dead=0%  collapse=0.150  |cos_dec|=0.531
+  [43/135] ann         w=8    seed=0 acc=82.22 top2=93.60 ce=0.5354 recon=0.0505
+        collapse: eff_rank=7.0/8 (87%)  PR90=5  |corr|=0.274  dead=0%  collapse=0.129
+  [44/135] ann         w=8    seed=1 acc=81.99 top2=93.08 ce=0.5419 recon=0.0506
+        collapse: eff_rank=7.0/8 (87%)  PR90=5  |corr|=0.296  dead=0%  collapse=0.129
+  [45/135] ann         w=8    seed=2 acc=82.48 top2=93.75 ce=0.5308 recon=0.0479
+        collapse: eff_rank=7.1/8 (89%)  PR90=5  |corr|=0.250  dead=0%  collapse=0.108
+
+==================================================================
+hidden width = 16
+==================================================================
+  [46/135] linear      w=16   seed=0 acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+        collapse: no hidden layer
+  [47/135] linear      w=16   seed=1 acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+        collapse: no hidden layer
+  [48/135] linear      w=16   seed=2 acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+        collapse: no hidden layer
+  [49/135] frozen      w=16   seed=0 acc=61.48 top2=78.23 ce=1.8512 recon=n/a
+        collapse: eff_rank=13.9/16 (87%)  PR90=10  |corr|=0.222  dead=0%  collapse=0.130
+  [50/135] frozen      w=16   seed=1 acc=52.11 top2=71.66 ce=1.8513 recon=n/a
+        collapse: eff_rank=13.2/16 (83%)  PR90=9  |corr|=0.272  dead=0%  collapse=0.173
+  [51/135] frozen      w=16   seed=2 acc=54.52 top2=74.50 ce=1.9277 recon=n/a
+        collapse: eff_rank=14.1/16 (88%)  PR90=11  |corr|=0.263  dead=0%  collapse=0.119
+  [52/135] mlp         w=16   seed=0 acc=85.25 top2=95.17 ce=0.4076 recon=n/a
+        collapse: eff_rank=13.0/16 (82%)  PR90=8  |corr|=0.251  dead=0%  collapse=0.185
+  [53/135] mlp         w=16   seed=1 acc=85.68 top2=95.36 ce=0.4083 recon=n/a
+        collapse: eff_rank=12.7/16 (79%)  PR90=7  |corr|=0.285  dead=0%  collapse=0.207
+  [54/135] mlp         w=16   seed=2 acc=85.59 top2=95.46 ce=0.4079 recon=n/a
+        collapse: eff_rank=12.6/16 (79%)  PR90=7  |corr|=0.305  dead=0%  collapse=0.213
+  [55/135] nan         w=16   seed=0 acc=84.45 top2=94.78 ce=0.4424 recon=0.0776
+        collapse: eff_rank=11.6/16 (73%)  PR90=7  |corr|=0.302  dead=0%  collapse=0.275  |cos_dec|=0.476
+  [56/135] nan         w=16   seed=1 acc=84.61 top2=94.78 ce=0.4364 recon=0.0779
+        collapse: eff_rank=12.3/16 (77%)  PR90=7  |corr|=0.300  dead=0%  collapse=0.234  |cos_dec|=0.533
+  [57/135] nan         w=16   seed=2 acc=84.54 top2=94.89 ce=0.4424 recon=0.0781
+        collapse: eff_rank=12.3/16 (77%)  PR90=7  |corr|=0.295  dead=0%  collapse=0.234  |cos_dec|=0.493
+  [58/135] ann         w=16   seed=0 acc=84.91 top2=95.01 ce=0.4324 recon=0.0403
+        collapse: eff_rank=12.7/16 (80%)  PR90=8  |corr|=0.285  dead=0%  collapse=0.205
+  [59/135] ann         w=16   seed=1 acc=84.56 top2=94.53 ce=0.4424 recon=0.0395
+        collapse: eff_rank=12.2/16 (76%)  PR90=7  |corr|=0.306  dead=0%  collapse=0.235
+  [60/135] ann         w=16   seed=2 acc=84.65 top2=94.88 ce=0.4370 recon=0.0393
+        collapse: eff_rank=12.5/16 (78%)  PR90=7  |corr|=0.308  dead=0%  collapse=0.218
+
+==================================================================
+hidden width = 32
+==================================================================
+  [61/135] linear      w=32   seed=0 acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+        collapse: no hidden layer
+  [62/135] linear      w=32   seed=1 acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+        collapse: no hidden layer
+  [63/135] linear      w=32   seed=2 acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+        collapse: no hidden layer
+  [64/135] frozen      w=32   seed=0 acc=66.26 top2=81.63 ce=1.6576 recon=n/a
+        collapse: eff_rank=26.5/32 (83%)  PR90=18  |corr|=0.218  dead=0%  collapse=0.172
+  [65/135] frozen      w=32   seed=1 acc=58.69 top2=77.53 ce=1.6250 recon=n/a
+        collapse: eff_rank=25.2/32 (79%)  PR90=16  |corr|=0.246  dead=0%  collapse=0.212
+  [66/135] frozen      w=32   seed=2 acc=60.61 top2=78.08 ce=1.7102 recon=n/a
+        collapse: eff_rank=26.5/32 (83%)  PR90=18  |corr|=0.264  dead=0%  collapse=0.173
+  [67/135] mlp         w=32   seed=0 acc=86.61 top2=95.88 ce=0.3737 recon=n/a
+        collapse: eff_rank=22.6/32 (71%)  PR90=11  |corr|=0.305  dead=0%  collapse=0.293
+  [68/135] mlp         w=32   seed=1 acc=87.07 top2=95.96 ce=0.3666 recon=n/a
+        collapse: eff_rank=22.8/32 (71%)  PR90=11  |corr|=0.295  dead=0%  collapse=0.289
+  [69/135] mlp         w=32   seed=2 acc=86.78 top2=95.83 ce=0.3680 recon=n/a
+        collapse: eff_rank=22.7/32 (71%)  PR90=10  |corr|=0.301  dead=0%  collapse=0.290
+  [70/135] nan         w=32   seed=0 acc=85.43 top2=95.17 ce=0.4038 recon=0.0779
+        collapse: eff_rank=21.1/32 (66%)  PR90=9  |corr|=0.318  dead=0%  collapse=0.341  |cos_dec|=0.541
+  [71/135] nan         w=32   seed=1 acc=86.19 top2=95.58 ce=0.3975 recon=0.0776
+        collapse: eff_rank=21.0/32 (65%)  PR90=8  |corr|=0.328  dead=0%  collapse=0.345  |cos_dec|=0.541
+  [72/135] nan         w=32   seed=2 acc=85.78 top2=95.40 ce=0.4022 recon=0.0785
+        collapse: eff_rank=22.3/32 (70%)  PR90=10  |corr|=0.290  dead=0%  collapse=0.302  |cos_dec|=0.515
+  [73/135] ann         w=32   seed=0 acc=85.65 top2=95.37 ce=0.3965 recon=0.0317
+        collapse: eff_rank=21.6/32 (67%)  PR90=9  |corr|=0.276  dead=0%  collapse=0.326
+  [74/135] ann         w=32   seed=1 acc=85.96 top2=95.21 ce=0.3994 recon=0.0319
+        collapse: eff_rank=21.9/32 (68%)  PR90=10  |corr|=0.314  dead=0%  collapse=0.316
+  [75/135] ann         w=32   seed=2 acc=86.04 top2=95.46 ce=0.3957 recon=0.0306
+        collapse: eff_rank=22.4/32 (70%)  PR90=10  |corr|=0.286  dead=0%  collapse=0.301
+
+==================================================================
+hidden width = 64
+==================================================================
+  [76/135] linear      w=64   seed=0 acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+        collapse: no hidden layer
+  [77/135] linear      w=64   seed=1 acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+        collapse: no hidden layer
+  [78/135] linear      w=64   seed=2 acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+        collapse: no hidden layer
+  [79/135] frozen      w=64   seed=0 acc=68.08 top2=84.55 ce=1.3183 recon=n/a
+        collapse: eff_rank=48.9/64 (76%)  PR90=28  |corr|=0.232  dead=0%  collapse=0.236
+  [80/135] frozen      w=64   seed=1 acc=66.90 top2=83.06 ce=1.3685 recon=n/a
+        collapse: eff_rank=48.0/64 (75%)  PR90=26  |corr|=0.249  dead=0%  collapse=0.250
+  [81/135] frozen      w=64   seed=2 acc=67.37 top2=82.35 ce=1.3660 recon=n/a
+        collapse: eff_rank=48.8/64 (76%)  PR90=28  |corr|=0.255  dead=0%  collapse=0.237
+  [82/135] mlp         w=64   seed=0 acc=87.53 top2=96.14 ce=0.3482 recon=n/a
+        collapse: eff_rank=40.4/64 (63%)  PR90=14  |corr|=0.299  dead=0%  collapse=0.368
+  [83/135] mlp         w=64   seed=1 acc=87.43 top2=96.03 ce=0.3468 recon=n/a
+        collapse: eff_rank=40.1/64 (63%)  PR90=14  |corr|=0.296  dead=0%  collapse=0.373
+  [84/135] mlp         w=64   seed=2 acc=87.38 top2=96.00 ce=0.3526 recon=n/a
+        collapse: eff_rank=40.3/64 (63%)  PR90=14  |corr|=0.311  dead=0%  collapse=0.371
+  [85/135] nan         w=64   seed=0 acc=86.47 top2=95.69 ce=0.3740 recon=0.0778
+        collapse: eff_rank=37.3/64 (58%)  PR90=11  |corr|=0.334  dead=0%  collapse=0.417  |cos_dec|=0.545
+  [86/135] nan         w=64   seed=1 acc=86.73 top2=95.65 ce=0.3798 recon=0.0778
+        collapse: eff_rank=37.2/64 (58%)  PR90=11  |corr|=0.322  dead=0%  collapse=0.418  |cos_dec|=0.522
+  [87/135] nan         w=64   seed=2 acc=86.81 top2=95.89 ce=0.3699 recon=0.0777
+        collapse: eff_rank=38.0/64 (59%)  PR90=12  |corr|=0.328  dead=0%  collapse=0.407  |cos_dec|=0.537
+  [88/135] ann         w=64   seed=0 acc=85.79 top2=95.68 ce=0.3876 recon=0.0247
+        collapse: eff_rank=39.1/64 (61%)  PR90=13  |corr|=0.300  dead=0%  collapse=0.388
+  [89/135] ann         w=64   seed=1 acc=86.88 top2=95.86 ce=0.3685 recon=0.0248
+        collapse: eff_rank=38.8/64 (61%)  PR90=13  |corr|=0.309  dead=0%  collapse=0.393
+  [90/135] ann         w=64   seed=2 acc=86.61 top2=95.77 ce=0.3750 recon=0.0251
+        collapse: eff_rank=38.5/64 (60%)  PR90=12  |corr|=0.301  dead=0%  collapse=0.398
+
+==================================================================
+hidden width = 128
+==================================================================
+  [91/135] linear      w=128  seed=0 acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+        collapse: no hidden layer
+  [92/135] linear      w=128  seed=1 acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+        collapse: no hidden layer
+  [93/135] linear      w=128  seed=2 acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+        collapse: no hidden layer
+  [94/135] frozen      w=128  seed=0 acc=71.04 top2=86.30 ce=1.0428 recon=n/a
+        collapse: eff_rank=88.9/128 (69%)  PR90=40  |corr|=0.236  dead=0%  collapse=0.305
+  [95/135] frozen      w=128  seed=1 acc=70.31 top2=85.37 ce=1.0875 recon=n/a
+        collapse: eff_rank=88.4/128 (69%)  PR90=39  |corr|=0.244  dead=0%  collapse=0.310
+  [96/135] frozen      w=128  seed=2 acc=70.86 top2=87.18 ce=1.0258 recon=n/a
+        collapse: eff_rank=87.7/128 (69%)  PR90=38  |corr|=0.256  dead=0%  collapse=0.315
+  [97/135] mlp         w=128  seed=0 acc=87.97 top2=96.62 ce=0.3327 recon=n/a
+        collapse: eff_rank=71.4/128 (56%)  PR90=17  |corr|=0.305  dead=0%  collapse=0.442
+  [98/135] mlp         w=128  seed=1 acc=87.68 top2=96.21 ce=0.3426 recon=n/a
+        collapse: eff_rank=71.8/128 (56%)  PR90=17  |corr|=0.308  dead=0%  collapse=0.439
+  [99/135] mlp         w=128  seed=2 acc=88.09 top2=96.47 ce=0.3317 recon=n/a
+        collapse: eff_rank=70.1/128 (55%)  PR90=16  |corr|=0.311  dead=0%  collapse=0.452
+  [100/135] nan         w=128  seed=0 acc=87.07 top2=96.02 ce=0.3596 recon=0.0776
+        collapse: eff_rank=66.6/128 (52%)  PR90=14  |corr|=0.343  dead=0%  collapse=0.480  |cos_dec|=0.588
+  [101/135] nan         w=128  seed=1 acc=87.32 top2=96.10 ce=0.3602 recon=0.0775
+        collapse: eff_rank=65.5/128 (51%)  PR90=13  |corr|=0.350  dead=0%  collapse=0.488  |cos_dec|=0.582
+  [102/135] nan         w=128  seed=2 acc=87.19 top2=96.12 ce=0.3569 recon=0.0770
+        collapse: eff_rank=63.8/128 (50%)  PR90=13  |corr|=0.370  dead=0%  collapse=0.501  |cos_dec|=0.607
+  [103/135] ann         w=128  seed=0 acc=87.25 top2=95.95 ce=0.3539 recon=0.0204
+        collapse: eff_rank=68.6/128 (54%)  PR90=16  |corr|=0.292  dead=0%  collapse=0.464
+  [104/135] ann         w=128  seed=1 acc=86.66 top2=95.97 ce=0.3671 recon=0.0208
+        collapse: eff_rank=67.5/128 (53%)  PR90=15  |corr|=0.304  dead=0%  collapse=0.472
+  [105/135] ann         w=128  seed=2 acc=86.71 top2=95.88 ce=0.3619 recon=0.0205
+        collapse: eff_rank=69.3/128 (54%)  PR90=16  |corr|=0.302  dead=0%  collapse=0.458
+
+==================================================================
+hidden width = 256
+==================================================================
+  [106/135] linear      w=256  seed=0 acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+        collapse: no hidden layer
+  [107/135] linear      w=256  seed=1 acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+        collapse: no hidden layer
+  [108/135] linear      w=256  seed=2 acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+        collapse: no hidden layer
+  [109/135] frozen      w=256  seed=0 acc=72.71 top2=89.03 ce=0.8516 recon=n/a
+        collapse: eff_rank=157.0/256 (61%)  PR90=54  |corr|=0.235  dead=0%  collapse=0.387
+  [110/135] frozen      w=256  seed=1 acc=72.11 top2=88.54 ce=0.8586 recon=n/a
+        collapse: eff_rank=154.9/256 (61%)  PR90=50  |corr|=0.247  dead=0%  collapse=0.395
+  [111/135] frozen      w=256  seed=2 acc=73.40 top2=89.17 ce=0.8443 recon=n/a
+        collapse: eff_rank=155.4/256 (61%)  PR90=51  |corr|=0.244  dead=0%  collapse=0.393
+  [112/135] mlp         w=256  seed=0 acc=88.35 top2=96.68 ce=0.3289 recon=n/a
+        collapse: eff_rank=122.5/256 (48%)  PR90=20  |corr|=0.296  dead=0%  collapse=0.521
+  [113/135] mlp         w=256  seed=1 acc=88.49 top2=96.70 ce=0.3247 recon=n/a
+        collapse: eff_rank=122.5/256 (48%)  PR90=20  |corr|=0.295  dead=0%  collapse=0.521
+  [114/135] mlp         w=256  seed=2 acc=88.29 top2=96.63 ce=0.3270 recon=n/a
+        collapse: eff_rank=123.3/256 (48%)  PR90=20  |corr|=0.293  dead=0%  collapse=0.518
+  [115/135] nan         w=256  seed=0 acc=87.57 top2=96.30 ce=0.3433 recon=0.0773
+        collapse: eff_rank=112.2/256 (44%)  PR90=15  |corr|=0.353  dead=0%  collapse=0.562  |cos_dec|=0.581
+  [116/135] nan         w=256  seed=1 acc=87.44 top2=96.17 ce=0.3465 recon=0.0771
+        collapse: eff_rank=110.4/256 (43%)  PR90=14  |corr|=0.365  dead=0%  collapse=0.569  |cos_dec|=0.597
+  [117/135] nan         w=256  seed=2 acc=87.53 top2=96.33 ce=0.3483 recon=0.0773
+        collapse: eff_rank=110.6/256 (43%)  PR90=14  |corr|=0.350  dead=0%  collapse=0.568  |cos_dec|=0.579
+  [118/135] ann         w=256  seed=0 acc=87.33 top2=96.53 ce=0.3483 recon=0.0172
+        collapse: eff_rank=118.2/256 (46%)  PR90=18  |corr|=0.295  dead=0%  collapse=0.538
+  [119/135] ann         w=256  seed=1 acc=87.27 top2=96.02 ce=0.3505 recon=0.0171
+        collapse: eff_rank=117.1/256 (46%)  PR90=18  |corr|=0.294  dead=0%  collapse=0.542
+  [120/135] ann         w=256  seed=2 acc=87.50 top2=96.24 ce=0.3437 recon=0.0172
+        collapse: eff_rank=118.6/256 (46%)  PR90=19  |corr|=0.286  dead=0%  collapse=0.537
+
+==================================================================
+hidden width = 512
+==================================================================
+  [121/135] linear      w=512  seed=0 acc=84.48 top2=94.61 ce=0.4419 recon=n/a
+        collapse: no hidden layer
+  [122/135] linear      w=512  seed=1 acc=84.52 top2=94.71 ce=0.4427 recon=n/a
+        collapse: no hidden layer
+  [123/135] linear      w=512  seed=2 acc=84.49 top2=94.81 ce=0.4395 recon=n/a
+        collapse: no hidden layer
+  [124/135] frozen      w=512  seed=0 acc=75.85 top2=90.42 ce=0.7200 recon=n/a
+        collapse: eff_rank=254.9/512 (50%)  PR90=63  |corr|=0.242  dead=0%  collapse=0.502
+  [125/135] frozen      w=512  seed=1 acc=75.73 top2=90.34 ce=0.7232 recon=n/a
+        collapse: eff_rank=254.3/512 (50%)  PR90=61  |corr|=0.247  dead=0%  collapse=0.503
+  [126/135] frozen      w=512  seed=2 acc=76.14 top2=90.80 ce=0.7093 recon=n/a
+        collapse: eff_rank=252.8/512 (49%)  PR90=60  |corr|=0.247  dead=0%  collapse=0.506
+  [127/135] mlp         w=512  seed=0 acc=88.48 top2=96.86 ce=0.3258 recon=n/a
+        collapse: eff_rank=204.0/512 (40%)  PR90=21  |corr|=0.278  dead=0%  collapse=0.602
+  [128/135] mlp         w=512  seed=1 acc=88.60 top2=96.92 ce=0.3201 recon=n/a
+        collapse: eff_rank=205.5/512 (40%)  PR90=21  |corr|=0.279  dead=0%  collapse=0.599
+  [129/135] mlp         w=512  seed=2 acc=88.71 top2=97.01 ce=0.3179 recon=n/a
+        collapse: eff_rank=204.9/512 (40%)  PR90=22  |corr|=0.278  dead=0%  collapse=0.600
+  [130/135] nan         w=512  seed=0 acc=87.01 top2=96.06 ce=0.3588 recon=0.0768
+        collapse: eff_rank=179.2/512 (35%)  PR90=14  |corr|=0.372  dead=0%  collapse=0.650  |cos_dec|=0.602
+  [131/135] nan         w=512  seed=1 acc=87.15 top2=96.24 ce=0.3559 recon=0.0768
+        collapse: eff_rank=179.0/512 (35%)  PR90=14  |corr|=0.371  dead=0%  collapse=0.650  |cos_dec|=0.598
+  [132/135] nan         w=512  seed=2 acc=87.21 top2=96.30 ce=0.3489 recon=0.0767
+        collapse: eff_rank=180.8/512 (35%)  PR90=14  |corr|=0.374  dead=0%  collapse=0.647  |cos_dec|=0.599
+  [133/135] ann         w=512  seed=0 acc=87.66 top2=96.51 ce=0.3382 recon=0.0144
+        collapse: eff_rank=197.1/512 (39%)  PR90=20  |corr|=0.285  dead=0%  collapse=0.615
+  [134/135] ann         w=512  seed=1 acc=87.47 top2=96.52 ce=0.3386 recon=0.0144
+        collapse: eff_rank=197.0/512 (38%)  PR90=20  |corr|=0.284  dead=0%  collapse=0.615
+  [135/135] ann         w=512  seed=2 acc=87.82 top2=96.43 ce=0.3371 recon=0.0145
+        collapse: eff_rank=196.6/512 (38%)  PR90=19  |corr|=0.287  dead=0%  collapse=0.616
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/results_sweep.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_acc.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_top2.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_ce.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_recon.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_collapse_index.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_eff_rank.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_eff_rank_frac.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_corr.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_dead.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_cos_dec.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/sweep_acc_vs_collapse.png
+
+variant      width     acc%    top2%       CE     recon   effrank  rank/H  |corr|   dead%  collapse
+---------------------------------------------------------------------------------------------------
+linear           2    84.50    94.71   0.4413       n/a       n/a     n/a     n/a     n/a       n/a
+linear           4    84.50    94.71   0.4413       n/a       n/a     n/a     n/a     n/a       n/a
+linear           8    84.50    94.71   0.4413       n/a       n/a     n/a     n/a     n/a       n/a
+linear          16    84.50    94.71   0.4413       n/a       n/a     n/a     n/a     n/a       n/a
+linear          32    84.50    94.71   0.4413       n/a       n/a     n/a     n/a     n/a       n/a
+linear          64    84.50    94.71   0.4413       n/a       n/a     n/a     n/a     n/a       n/a
+linear         128    84.50    94.71   0.4413       n/a       n/a     n/a     n/a     n/a       n/a
+linear         256    84.50    94.71   0.4413       n/a       n/a     n/a     n/a     n/a       n/a
+linear         512    84.50    94.71   0.4413       n/a       n/a     n/a     n/a     n/a       n/a
+
+variant      width     acc%    top2%       CE     recon   effrank  rank/H  |corr|   dead%  collapse
+---------------------------------------------------------------------------------------------------
+frozen           2    24.16    41.78   2.2614       n/a      1.98   0.990   0.165     0.0     0.010
+frozen           4    35.41    56.12   2.1837       n/a      3.80   0.950   0.220     0.0     0.050
+frozen           8    48.73    69.18   2.0518       n/a      7.16   0.895   0.266     0.0     0.105
+frozen          16    56.04    74.80   1.8767       n/a     13.75   0.859   0.252     0.0     0.141
+frozen          32    61.85    79.08   1.6643       n/a     26.06   0.814   0.243     0.0     0.186
+frozen          64    67.45    83.32   1.3509       n/a     48.56   0.759   0.245     0.0     0.241
+frozen         128    70.74    86.28   1.0520       n/a     88.33   0.690   0.245     0.0     0.310
+frozen         256    72.74    88.91   0.8515       n/a    155.80   0.609   0.242     0.0     0.391
+frozen         512    75.91    90.52   0.7175       n/a    253.98   0.496   0.245     0.0     0.504
+
+variant      width     acc%    top2%       CE     recon   effrank  rank/H  |corr|   dead%  collapse
+---------------------------------------------------------------------------------------------------
+mlp              2    47.84    73.87   1.2529       n/a      1.96   0.981   0.277     0.0     0.019
+mlp              4    76.31    89.60   0.6818       n/a      3.88   0.969   0.207     0.0     0.031
+mlp              8    83.90    94.14   0.4714       n/a      7.15   0.893   0.283     0.0     0.107
+mlp             16    85.51    95.33   0.4080       n/a     12.77   0.798   0.280     0.0     0.202
+mlp             32    86.82    95.89   0.3694       n/a     22.70   0.710   0.301     0.0     0.290
+mlp             64    87.45    96.06   0.3492       n/a     40.28   0.629   0.302     0.0     0.371
+mlp            128    87.91    96.43   0.3356       n/a     71.10   0.555   0.308     0.0     0.445
+mlp            256    88.38    96.67   0.3268       n/a    122.77   0.480   0.295     0.0     0.520
+mlp            512    88.60    96.93   0.3212       n/a    204.81   0.400   0.278     0.0     0.600
+
+variant      width     acc%    top2%       CE     recon   effrank  rank/H  |corr|   dead%  collapse
+---------------------------------------------------------------------------------------------------
+nan              2    40.87    68.95   1.3985    0.0739      1.94   0.971   0.397     0.0     0.029
+nan              4    72.73    88.89   0.8406    0.0774      3.82   0.954   0.231     0.0     0.046
+nan              8    82.13    93.38   0.5392    0.0775      6.82   0.852   0.288     0.0     0.148
+nan             16    84.53    94.82   0.4404    0.0779     12.04   0.752   0.299     0.0     0.248
+nan             32    85.80    95.38   0.4012    0.0780     21.46   0.671   0.312     0.0     0.329
+nan             64    86.67    95.74   0.3746    0.0778     37.50   0.586   0.328     0.0     0.414
+nan            128    87.19    96.08   0.3589    0.0773     65.31   0.510   0.354     0.0     0.490
+nan            256    87.51    96.27   0.3460    0.0772    111.07   0.434   0.356     0.0     0.566
+nan            512    87.12    96.20   0.3545    0.0768    179.68   0.351   0.372     0.0     0.649
+
+variant      width     acc%    top2%       CE     recon   effrank  rank/H  |corr|   dead%  collapse
+---------------------------------------------------------------------------------------------------
+ann              2    40.57    67.26   1.3485    0.0662      1.94   0.970   0.416     0.0     0.030
+ann              4    67.52    87.03   0.8670    0.0584      3.74   0.934   0.267     0.0     0.066
+ann              8    82.23    93.48   0.5361    0.0497      7.03   0.878   0.273     0.0     0.122
+ann             16    84.71    94.81   0.4373    0.0397     12.49   0.780   0.300     0.0     0.220
+ann             32    85.88    95.35   0.3972    0.0314     21.95   0.686   0.292     0.0     0.314
+ann             64    86.43    95.77   0.3770    0.0249     38.83   0.607   0.303     0.0     0.393
+ann            128    86.87    95.93   0.3609    0.0206     68.50   0.535   0.299     0.0     0.465
+ann            256    87.37    96.26   0.3475    0.0172    117.97   0.461   0.292     0.0     0.539
+ann            512    87.65    96.49   0.3380    0.0144    196.94   0.385   0.285     0.0     0.615
+
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/summary_table.txt
+
+done in 1323.0s. Outputs in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_week7/sweep_hidden/
+
+Finished: Sat 25 Jul 16:13:12 BST 2026
+==========================================

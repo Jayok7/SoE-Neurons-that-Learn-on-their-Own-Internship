@@ -1,0 +1,6 @@
+==========================================
+Job: fashion-simple | ID: 17675734
+Node: node878.csf3.man.alces.network | Started: Fri 17 Jul 23:40:34 BST 2026
+mode=both variants=default hidden=20 res=28 act=sigmoid
+seeds=1 epochs=2 batch=128 lr=0.001 ae_prob=0.5 lam=2
+

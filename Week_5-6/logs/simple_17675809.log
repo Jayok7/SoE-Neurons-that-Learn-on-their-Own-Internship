@@ -1,0 +1,65 @@
+==========================================
+Job: fashion-simple | ID: 17675809
+Node: node885.csf3.man.alces.network | Started: Fri 17 Jul 23:51:22 BST 2026
+mode=both variants=default hidden=20 res=28 act=sigmoid
+seeds=1 epochs=2 batch=128 lr=0.001 ae_prob=0.5 lam=2
+
+device=cuda variants=['linear', 'frozen', 'mlp', 'nan'] seeds=1 epochs=2 batch=128 lr=0.001 res=28 hidden=20 act=sigmoid ae_prob=0.5 | train=60000 test=10000
+
+[linear]
+  seed 0: acc=82.59 top2=93.69 ce=0.5155 recon=n/a
+
+[frozen]
+  seed 0: acc=45.93 top2=69.39 ce=2.2158 recon=n/a
+
+[mlp]
+  seed 0: acc=80.73 top2=92.97 ce=0.6144 recon=n/a
+
+[nan]
+  seed 0: acc=76.72 top2=90.02 ce=0.8274 recon=0.0857
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/results_interleaved.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/acc_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/top2_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/ce_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/recon_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/cls_grid_linear.png
+  [reconstruction_grid] skipped — LinearClassifier has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/cls_grid_frozen.png
+  [reconstruction_grid] skipped — MLP has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/cls_grid_mlp.png
+  [reconstruction_grid] skipped — MLP has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/cls_grid_nan.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/recon_grid_nan.png
+
+  variant        acc%    top2%       CE     recon
+  linear        82.59    93.69   0.5155       n/a
+  frozen        45.93    69.39   2.2158       n/a
+  mlp           80.73    92.97   0.6144       n/a
+  nan           76.72    90.02   0.8274    0.0857
+
+done in 136.1s. Outputs in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_interleaved/
+device=cuda variants=['mlp', 'nan'] lam=2.0 seeds=1 epochs=2 batch=128 lr=0.001 res=28 hidden=20 act=sigmoid | train=60000 test=10000
+
+[mlp]
+  seed 0: acc=80.73 top2=92.97 ce=0.6144 recon=n/a
+
+[nan]
+  seed 0: acc=80.43 top2=93.02 ce=0.6118 recon=0.0795
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/results_combined.json
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/acc_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/top2_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/ce_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/recon_curves.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/cls_grid_mlp.png
+  [reconstruction_grid] skipped — MLP has no autoencoder
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/cls_grid_nan.png
+  saved /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/recon_grid_nan.png
+
+  variant        acc%    top2%       CE     recon
+  mlp           80.73    92.97   0.6144       n/a
+  nan           80.43    93.02   0.6118    0.0795
+
+done in 23.5s. Outputs in /mnt/iusers01/fse-ugpgt01/eee01/m84149ji/autoencoder-internship/experiments_fashion_h20/simple_combined/
+
+Finished: Fri 17 Jul 23:55:07 BST 2026
+==========================================
