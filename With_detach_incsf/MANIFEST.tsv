@@ -1,0 +1,72 @@
+19078488	w56	fashion	det_sch-interleaved	both	interleaved	1	none	none
+19078489	w56	fashion	det_sch-interleaved	both	interleaved	1	none	none
+19078494	w7	fashion	det_sch-interleaved	sweep	interleaved	1	none	none
+19078495	w89	mnist	det_sch-interleaved	sweep	interleaved	1	none	none
+19078499	w7	fashion	att_sch-combined	sweep	combined	0	none	none
+19078496	w89	emnist-balanced	det_sch-interleaved	sweep	interleaved	1	none	none
+19078502	w10	emnist-balanced	att_sch-combined	width	combined	0	none	none
+19078500	w89	mnist	att_sch-combined	sweep	combined	0	none	none
+19078503	w10	emnist-balanced	att_sch-combined	nodes20	combined	0	none	none
+19078505	w10	emnist-balanced	att_sch-combined	depth	combined	0	none	none
+19078504	w10	emnist-balanced	att_sch-combined_pen-decoder	penalty	combined	0	none	decoder
+19078506	w10	emnist-balanced	att_sch-combined	matched	combined	0	none	none
+19078501	w89	emnist-balanced	att_sch-combined	sweep	combined	0	none	none
+19079635	w10	emnist-balanced	det_sch-interleaved_pen-spectral	penalty	interleaved	1	none	spectral
+19079633	w7	fashion	det_sch-interleaved_inh-lateral	sweep	interleaved	1	lateral	none
+19079634	w7	fashion	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19079640	w10	emnist-balanced	det_sch-interleaved	width	interleaved	1	none	none
+19079641	w10	emnist-balanced	det_sch-interleaved_pen-decoder	penalty	interleaved	1	none	decoder
+19079636	w10	emnist-balanced	det_sch-interleaved_inh-lateral	width	interleaved	1	lateral	none
+19081080	w56	fashion	det_sch-interleaved_h128	both	interleaved	1	none	none
+19081305	w56	fashion	det_sch-interleaved_h128	both	interleaved	1	none	none
+19081304	w56	fashion	det_sch-interleaved_h20	both	interleaved	1	none	none
+19081307	w89	mnist	att_sch-combined	sweep	combined	0	none	none
+19081306	w7	fashion	att_sch-combined	sweep	combined	0	none	none
+19081309	w10	emnist-balanced	att_sch-combined	width	combined	0	none	none
+19081311	w10	emnist-balanced	att_sch-combined	depth	combined	0	none	none
+19081310	w10	emnist-balanced	att_sch-combined	nodes20	combined	0	none	none
+19081312	w10	emnist-balanced	att_sch-combined	matched	combined	0	none	none
+19081318	w10	emnist-balanced	det_sch-interleaved	nodes20	interleaved	1	none	none
+19081313	w10	emnist-balanced	att_sch-combined_pen-decoder	penalty	combined	0	none	decoder
+19081317	w10	emnist-balanced	det_sch-interleaved	width	interleaved	1	none	none
+19081308	w89	emnist-balanced	att_sch-combined	sweep	combined	0	none	none
+19081321	w10	emnist-balanced	det_sch-interleaved	depth	interleaved	1	none	none
+19081319	w10	emnist-balanced	det_sch-interleaved_pen-decoder	penalty	interleaved	1	none	decoder
+19081320	w10	emnist-balanced	det_sch-interleaved_pen-spectral	penalty	interleaved	1	none	spectral
+19081322	w10	emnist-balanced	det_sch-interleaved	matched	interleaved	1	none	none
+19081329	w10	emnist-balanced	det_sch-interleaved_inh-kwta	width	interleaved	1	kwta	none
+19081327	w7	fashion	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19081328	w7	fashion	det_sch-interleaved_inh-lateral	sweep	interleaved	1	lateral	none
+19081342	w7	fashion	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19081343	w7	fashion	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19081330	w89	emnist-balanced	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19081344	w7	fashion	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19081345	w7	fashion	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19081346	w7	fashion	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19081347	w7	fashion	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19081348	w7	fashion	det_sch-interleaved_inh-kwta	sweep	interleaved	1	kwta	none
+19081740	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	tau0.05_G16	tau
+19081741	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	fire0.5_G16	fire
+19081740	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	tau0.1_G16	tau
+19081741	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	fire0.7_G16	fire
+19081739	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	baseline	baseline
+19081740	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	tau0.25_G16	tau
+19081741	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	fire0.9_G16	fire
+19081743	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	sigma0.5_G16	sigma
+19081740	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	tau0.5_G16	tau
+19081742	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	routing_G16	routing
+19081744	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	steps10_G16	steps
+19081743	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	sigma1_G16	sigma
+19081740	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	tau1.0_G16	tau
+19081743	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	sigma2_G16	sigma
+19081744	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	steps25_G16	steps
+19081743	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	sigma4_G16	sigma
+19081743	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	sigma8_G16	sigma
+19081744	ttfs	emnist-balanced	det_interleaved_H128_T25_G16	steps50_G16	steps
+19094815	w10	emnist-balanced	det_sch-interleaved	nodes20	interleaved	1	none	none
+19094816	w10	emnist-balanced	att_sch-combined	nodes20	combined	0	none	none
+19094817	w10	emnist-balanced	det_sch-interleaved	width	interleaved	1	none	none
+19094819	w10	emnist-balanced	det_sch-interleaved_pen-decoder	penalty	interleaved	1	none	decoder
+19094818	w10	emnist-balanced	att_sch-combined	width	combined	0	none	none
+19094820	w10	emnist-balanced	det_sch-interleaved_pen-spectral	penalty	interleaved	1	none	spectral
+19094821	w10	emnist-balanced	att_sch-combined_pen-decoder	penalty	combined	0	none	decoder

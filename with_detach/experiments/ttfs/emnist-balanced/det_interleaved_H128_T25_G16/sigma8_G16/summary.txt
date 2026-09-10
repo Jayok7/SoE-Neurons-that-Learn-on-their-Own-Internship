@@ -1,0 +1,3 @@
+variant                        acc@1  acc@end  recon@end  rank@end  groups  within  between  silent
+---------------------------------------------------------------------------------------------------
+ttfs_group16-coincidence       14.10    37.75     0.0666     70.19   15.05    8.22     8.31    0.46

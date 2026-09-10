@@ -1,0 +1,20 @@
+Collapse analysis — hidden width 128
+
+run              acc%   effrank   rank/H    PR90   |corr|    p>0.9   dead%    sat%  |cosdec|  collapse
+------------------------------------------------------------------------------------------------------
+nan              5.94      1.37    0.011     1.0    1.000    1.000     0.0     0.0     1.000     0.989
+group64         13.83      3.17    0.025     2.0    0.557    0.482     0.0     0.0     0.544     0.975
+group32         34.41     13.86    0.108     4.6    0.387    0.040     0.0     0.0     0.379     0.892
+group16         40.70     22.70    0.177     8.0    0.278    0.003     0.0     0.0     0.274     0.823
+group8          56.04     35.83    0.280    14.0    0.193    0.000     0.0     0.0     0.184     0.720
+group4          61.56     51.91    0.406    27.0    0.134    0.000     0.0     0.0     0.125     0.594
+group2          63.29     77.61    0.606    50.0    0.093    0.000     0.0     0.0     0.083     0.394
+ann             62.35    116.74    0.912    86.0    0.069    0.000     0.0     0.0       n/a     0.088
+
+Reading the table:
+  rank/H near 1  -> neurons independent, layer healthy
+  rank/H near 0  -> layer behaves as far fewer neurons than H
+  |corr| near 1  -> neurons are duplicates of one another
+  dead%          -> neurons with constant output (no signal)
+  |cosdec| near 1-> NAN neurons reconstruct the same template
+  collapse       -> 1 - rank/H, the single headline number
