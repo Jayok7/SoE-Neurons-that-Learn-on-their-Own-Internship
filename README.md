@@ -1,6 +1,6 @@
 # Neurons that Learn on their Own: Neuron Autoencoders for MNIST and Spiking Neural Networks
 
-This repository contains the code and experiments for the School of Engineering (SoE) Summer Internship at the **University of Manchester**, conducted under the supervision of **Dr. Davide Bertozzi**.
+This repository contains the code and experiments for a Summer Internship.
 
 The project is titled **"Neurons that Learn on their Own"** and focuses on implementing, scaling, and extending the neural architecture proposed by Dr. Larry Bull in his paper *"Neurons as Autoencoders"* (2025). Specifically, the work spans from reproducing the paper's original hill-climbing algorithm on tuneable NK fitness models, to scaling the approach with gradient descent in PyTorch on MNIST, and finally integrating it into Spiking Neural Networks (SNNs).
 
